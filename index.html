@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Health Remedy Assistant</title>
+    <style>
+        html, body {
+             height: 100%;
+             margin: 0;
+             font-family: Arial;
+        }
+        body {
+            font-family: Arial;
+            text-align: center;
+            background-image: url("medical-bg.jpg.png");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+        /* Center Card */
+        .card {
+            background: rgba(255,255,255,0.9);
+            width: 350px;
+            margin: 60px auto;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+
+        /* Heading */
+        h1 {
+        text-align: center;
+        color: #079694;
+        }
+        input, select {
+            padding: 10px;
+            width: 220px;
+            margin: 8px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background: linear-gradient(45deg, #28a745, #20c997);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button:hover {
+        transform: scale(1.05);
+        }
+
+        #result {
+        margin-top: 15px;
+        padding: 10px;
+        background: #f8f9fa;
+        border-radius: 8px;
+        }
+
+        }
+        .suggestion-box {
+            border: 1px solid #7db268;
+            max-width: 220px;
+            background: rgb(214, 226, 218);
+            position: absolute;
+            margin-left: auto;
+            margin-right: auto;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+        .suggestion-box div {
+            padding: 8px;
+            cursor: pointer;
+        }
+        .suggestion-box div:hover {
+            background: #f0f0f0;
+        }
+        #imageBox{
+  width:200px;
+  height:200px;
+  margin:15px auto;
+  background-size: cover;
+  background-position: center;
+  border-radius: 12px;
+  display:none;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+    </style>
+</head>
+<body>
+
+<h1>Health Remedy Assistant</h1>
+
+<div class="card">
+
+<!-- STEP 1: Health Issue -->
+<input type="text" id="issueInput" placeholder="Enter health issue" onkeyup="showSuggestions()">
+<div id="suggestions" class="suggestion-box"></div>
+
+
+<br>
+
+<!-- STEP 2 & 3: Age Group and Weight (conditionally shown) -->
+<div id="ageWeightFields" style="display:block;">
+    <select id="ageGroup">
+        <option value="">Select Age Group</option>
+        <option value="infant">Infant (0–1 year)</option>
+        <option value="child">Child (1–12 years)</option>
+        <option value="adult">Adult</option>
+        <option value="elderly">Elderly (60+)</option>
+    </select>
+    <br>
+    <input type="number" id="weight" placeholder="Enter weight (kg)">
+    <br>
+</div>
+
+<button onclick="getRemedy()">Get Remedy</button>
+
+
+
+<p id="result"></p>
+
+<p><b>Note:</b> For minor issues only. Consult a doctor if symptoms persist.</p>
+
+<script>
+// List of issues for autocomplete
+const issues = [
+    "fever","cold","cough","sore throat","weakness","vomiting","diarrhea","stomach pain",
+    "indigestion","acidity","constipation","pimple","dark circles","dry lips","dry skin",
+    "cracked heels","cuts","wound","burn","burns","sunburn","insect bite","allergy","rash",
+    "toothache","ear pain","nosebleed","headache","back pain","joint pain","muscle pain",
+    "sprain","dizziness","nausea","eye irritation","sore muscles"
+];
+
+
+
+// Issues that require age and weight
+const weightRequiredIssues = ["fever","cold","cough","stomach pain","weakness","vomiting"];
+
+// Autocomplete suggestions
+function showSuggestions() {
+    let input = document.getElementById("issueInput").value.toLowerCase();
+    let box = document.getElementById("suggestions");
+    box.innerHTML = "";
+    if(input === "") return;
+
+    issues.forEach(item => {
+        if(item.includes(input)){
+            let div = document.createElement("div");
+            div.innerHTML = item;
+            div.onclick = () => {
+                document.getElementById("issueInput").value = item;
+                box.innerHTML = "";
+
+                toggleAgeWeight(item);
+                
+                getRemedy();
+            };
+            box.appendChild(div);
+        }
+    });
+}
+
+
+// Show/hide age & weight fields
+function toggleAgeWeight(issue){
+    if(weightRequiredIssues.includes(issue.toLowerCase())){
+        document.getElementById("ageWeightFields").style.display = "block";
+    } else {
+        document.getElementById("ageWeightFields").style.display = "none";
+    }
+}
+
+// Get remedy function
+
+function getRemedy(){
+    const issue = document.getElementById("issueInput").value.toLowerCase();
+    let age = document.getElementById("ageGroup").value;
+    let weight = parseFloat(document.getElementById("weight").value);
+    let result = "";
+
+    const requiresAW = weightRequiredIssues.includes(issue);
+
+    // Validation
+    if(issue === ""){
+        document.getElementById("result").innerHTML = "⚠ Please enter a health issue.";
+        return;
+    }
+    if(requiresAW && age === ""){
+        document.getElementById("result").innerHTML = "⚠ Please select age group.";
+        return;
+    }
+    if(requiresAW && !weight){
+        document.getElementById("result").innerHTML = "⚠ Please enter weight.";
+        return;
+    }
+
+    // Weight warnings
+    let warning = "";
+    if(requiresAW){
+        if(age === "infant" && weight < 2.5) warning = "⚠ Infant weight low. Consult doctor.<br><br>";
+        else if(age === "child" && weight < 10) warning = "⚠ Child weight low.<br><br>";
+        else if((age === "adult" || age === "elderly") && weight < 45) warning = "⚠ Underweight. Proper nutrition needed.<br><br>";
+    }
+
+    // === Existing remedies preserved ===
+    if(issue === "cough"){
+        if(age === "infant"){
+            result = warning + "✔ Use saline drops with suction, a cool-mist humidifier, steam sessions, and frequent breastmilk/formula for hydration.<br>\
+✔ Ensure rest and comfort; slightly elevate head safely to ease congestion.<br>\
+⚠ No honey under 1 year and no OTC cough medicines under 2; see a doctor if breathing trouble, high fever, dehydration, or cough lasts over 3 weeks.<br>";
+        } else if(age === "child"){
+            result = warning + "✔ Give 1 teaspoon honey (age 1+ only), plenty of fluids, and use a cool-mist humidifier or steam to ease cough and congestion.<br>\
+✔ Use saline nose drops for blocked nose, ensure rest, and elevate the head slightly for comfort.<br>\
+⚠ No honey under 1 year and avoid OTC cough medicines (especially under 4–6 years); see a doctor for breathing trouble, wheezing, high fever, or cough over 2 weeks.<br>";
+        } else {
+            result = warning + "✔ Take 1–2 tsp honey in warm water/tea, drink ginger or turmeric milk, and stay well hydrated to soothe the throat and reduce inflammation.<br>\
+✔ Use steam inhalation or a humidifier, gargle warm salt water, and use lozenges to ease irritation and loosen mucus.<br>\
+⚠ Avoid smoke/irritants; see a doctor if cough lasts more than 3 weeks, causes breathing trouble, or comes with high fever.<br>";
+        }
+    }
+    else if(issue === "fever"){
+        // Preserve your existing fever remedies exactly
+        if(age === "infant"){
+            result = warning + "✔ Give frequent breastmilk/formula (water only if over 6 months), keep the baby lightly clothed, and maintain a cool room to prevent dehydration and overheating.<br>\
+✔ Use a lukewarm sponge bath for comfort; keep the baby rested and monitor temperature regularly.<br>\
+⚠ Consult a doctor first for medication; seek immediate care if under 3 months with fever, fever lasts over 3 days, or there is breathing difficulty or unusual sleepiness.<br>";
+        } else if(age==="child"){
+            result = warning + "✔ Give plenty of fluids (water, soups, popsicles) and keep the child in light clothing in a cool room; encourage rest.<br>\
+✔ Use a lukewarm sponge bath for comfort; give acetaminophen or ibuprofen based on weight (never aspirin).<br>\
+⚠ See a doctor if fever lasts over 3 days, signs of dehydration appear, or there is breathing difficulty, rash, or unusual drowsiness.<br>";
+        } else {
+            result = warning + "✔ Drink plenty of fluids (water, soups, herbal tea), rest well, and wear light clothing in a cool room to help reduce body temperature.<br>\
+✔ Use acetaminophen or ibuprofen for discomfort and apply lukewarm compresses or take a lukewarm bath for relief.<br>\
+⚠ Seek medical care if fever exceeds 103°F (39.4°C), lasts more than 3 days, or includes confusion, stiff neck, or breathing difficulty.<br>";
+        }
+    }
+    
+    
+    else if(issue === "cold"){
+            if(age === "infant"){
+            result = warning + "✔ Use saline nose drops with a suction bulb, a cool-mist humidifier or steam, and keep the baby well-hydrated with breastmilk or formula.<br>\
+            ✔ Keep the baby comfortable and rested; slight head elevation and gentle warm massage may help ease congestion.<br>\
+            ⚠ No honey under 1 year and avoid OTC cold medicines; see a doctor for breathing trouble, fever in infants under 3 months, dehydration, or symptoms lasting over 10–14 days.<br>";
+            }
+            else if(age==="child"){
+            result = warning + "✔ Use saline nose drops with suction, a cool-mist humidifier, and give plenty of fluids; ensure the child gets enough rest.<br>\
+            ✔ For children over 1 year, give ½–1 teaspoon honey for cough; use acetaminophen or ibuprofen for fever/pain (correct dose by weight).<br>\
+            ⚠ No honey under 1 year, no aspirin, and avoid OTC cold medicines under 6; see a doctor for breathing trouble, dehydration, high fever, or symptoms lasting over 10–14 days.<br>";
+            }
+            else{
+            result = warning + "✔ Stay hydrated (water, warm tea, soups), rest well, and use a humidifier or steam to relieve congestion.<br>\
+            ✔ Gargle warm salt water for sore throat, use saline spray, and take honey to soothe cough; acetaminophen or ibuprofen can reduce fever and body aches.<br>\
+            ⚠ See a doctor if symptoms last more than 10 days or if there is high fever, chest pain, or breathing difficulty.<br>";
+            }
+    }
+    else if(issue === "sore throat"){
+            if(age === "infant"){
+            result = "✔ Give frequent breastmilk or formula to keep the baby hydrated.<br>\
+            ✔ Use a cool-mist humidifier and keep air moist to soothe the throat.<br>\
+            ⚠ Do not give honey under 1 year; see a doctor if feeding difficulty, fever, or breathing problems occur.<br>";
+            }
+        else if(age === "child"){
+            result = "✔ Give warm fluids and ensure plenty of rest.<br>\
+            ✔ For children over 1 year, ½–1 teaspoon honey can soothe throat irritation.<br>\
+            ⚠ Avoid very hot foods and OTC lozenges for young children; see a doctor if pain is severe or lasts over 3 days.<br>";
+           }
+        else{
+        result = "✔ Drink warm fluids, herbal tea, or honey-lemon water to soothe the throat.<br>\
+        ✔ Gargle warm salt water and use steam inhalation to reduce irritation.<br>\
+        ⚠ See a doctor if sore throat lasts more than 1 week, causes difficulty swallowing, or comes with high fever.<br>";
+           }
+        }
+        else if(issue === "headache"){
+        if(age === "infant"){
+        result = "⚠ Headaches are hard to identify in infants; consult a doctor if the baby is unusually irritable or has fever.<br>";
+          }
+        else if(age==="child"){
+        result = "✔ Ensure rest and proper sleep.<br>\
+        ✔ Give plenty of fluids and reduce screen time.<br>\
+        ⚠ See a doctor if headache is severe or frequent.<br>";
+          }
+        else{
+        result = "✔ Rest in a quiet, dark room and stay hydrated.<br>\
+        ✔ Apply a cold compress to the forehead.<br>\
+        ⚠ Seek medical help if headaches are severe, frequent, or with vision problems.<br>";
+           }
+        }
+        else if(issue === "stomach pain"){
+        if(age === "infant"){
+        result = warning + "✔ Burp the baby and keep upright after feeding.<br>\
+        ✔ Gentle tummy massage may help gas discomfort.<br>\
+        ⚠ See a doctor if vomiting, fever, or continuous crying occurs.<br>";
+           }
+        else if(age==="child"){
+        result = warning + "✔ Give warm fluids and light foods like rice or banana.<br>\
+        ✔ Encourage rest and avoid junk food.<br>\
+        ⚠ Consult a doctor if pain is severe or lasts more than a day.<br>";
+           }
+        else{
+        result = warning + "✔ Eat light foods and drink warm water.<br>\
+        ✔ Avoid spicy or oily food until relief.<br>\
+        ⚠ Seek medical help if pain is severe or persistent.<br>";
+           }
+        }
+        else if(issue === "weakness"){
+        if(age === "infant"){
+        result = warning + "✔ Ensure frequent feeding (breastmilk/formula).<br>\
+        ⚠ See a doctor if the baby is unusually sleepy or feeding poorly.<br>";
+           }
+        else if(age==="child"){
+        result = warning + "✔ Give fluids, fruits, and nutritious foods.<br>\
+        ✔ Ensure proper sleep and rest.<br>\
+        ⚠ Consult a doctor if weakness continues.<br>";
+           }
+        else{
+        result = warning + "✔ Drink water, eat balanced meals, and rest well.<br>\
+        ✔ Include fruits and iron-rich foods.<br>\
+        ⚠ Seek medical advice if weakness is persistent.<br>";
+           }
+        }
+        else if(issue === "vomiting"){
+        if(age === "infant"){
+        result = "✔ Give small frequent feeds to prevent dehydration.<br>\
+        ✔ Keep the baby upright after feeding.<br>\
+        ⚠ See a doctor if vomiting is frequent or baby seems dehydrated.<br>";
+           }
+        else if(age==="child"){
+        result ="✔ Give small sips of water or ORS.<br>\
+        ✔ Avoid solid food until vomiting stops.<br>\
+        ⚠ Seek medical care if vomiting continues or dehydration signs appear.<br>";
+           }
+        else{
+        result ="✔ Drink ORS or clear fluids to stay hydrated.<br>\
+        ✔ Eat light foods after vomiting stops.<br>\
+        ⚠ Consult a doctor if vomiting persists or includes blood.<br>";
+           }
+        }
+        else if(issue === "burn"){
+        result ="✔ Cool the burn under running water for 10 minutes.<br>\
+        ✔ Apply aloe vera or burn ointment.<br>\
+        ⚠ Seek medical care for deep burns or blisters.<br>";
+        }
+        else if(issue === "diarrhea"){
+        if(age === "infant"){
+        result ="✔ Continue breastfeeding or formula feeding frequently.<br>\
+        ✔ Use ORS only if advised by a doctor.<br>\
+        ⚠ Seek medical care if dehydration signs or diarrhea lasts more than 24 hours.<br>";
+           }
+        else if(age==="child"){
+        result ="✔ Give ORS, water, and light foods like rice or banana.<br>\
+        ✔ Maintain hygiene and handwashing.<br>\
+        ⚠ See a doctor if diarrhea lasts more than 2 days or dehydration appears.<br>";
+           }
+        else{
+        result ="✔ Drink ORS and plenty of fluids.<br>\
+        ✔ Eat light foods like rice, curd, and banana.<br>\
+        ⚠ Consult a doctor if diarrhea persists or includes blood.<br>";
+           }
+        }
+        else if(issue === "toothache"){
+        if(age === "infant"){
+        result ="✔ Teething may cause discomfort; use a clean teething ring.<br>\
+        ⚠ Consult a pediatrician if swelling or fever occurs.<br>";
+           }
+        else if(age==="child"){
+        result ="✔ Rinse mouth with warm salt water.<br>\
+        ✔ Avoid very cold or sugary foods.<br>\
+        ⚠ Visit a dentist if pain persists.<br>";
+           }
+        else{
+        result ="✔ Gargle warm salt water and maintain oral hygiene.<br>\
+        ✔ Use clove oil for temporary relief.<br>\
+        ⚠ See a dentist if swelling or severe pain occurs.<br>";
+           }
+        }
+        else if(issue === "ear pain"){
+        if(age === "infant"){
+        result ="⚠ Ear pain in infants requires medical evaluation.<br>";
+           }
+        else if(age==="child"){
+        result ="✔ Apply a warm compress near the ear.<br>\
+        ✔ Keep the child upright to reduce pressure.<br>\
+        ⚠ Consult a doctor if fever or severe pain occurs.<br>";
+           }
+        else{
+        result ="✔ Apply a warm compress to reduce discomfort.<br>\
+        ✔ Avoid inserting objects into the ear.<br>\
+        ⚠ Seek medical help if pain persists or hearing reduces.<br>";
+           }
+        }
+        else if(issue === "nosebleed"){
+        result ="✔ Sit upright and lean slightly forward.<br>\
+        ✔ Pinch the soft part of the nose for 10 minutes.<br>\
+        ⚠ Seek medical care if bleeding lasts more than 20 minutes.<br>";
+        }
+        else if(issue === "constipation"){
+        if(age === "infant"){
+        result ="✔ Gentle tummy massage may help.<br>\
+        ✔ Consult a doctor before giving water or juice.<br>";
+           }
+        else if(age==="child"){
+        result ="✔ Increase fruits, vegetables, and water intake.<br>\
+        ✔ Encourage physical activity.<br>\
+        ⚠ See a doctor if constipation persists.<br>";
+           }
+        else{
+        result ="✔ Eat fiber-rich foods and drink plenty of water.<br>\
+        ✔ Regular exercise helps bowel movement.<br>\
+        ⚠ Seek medical advice if persistent.<br>";
+           }
+        }
+        else if(issue === "allergy" || issue === "rash"){
+        result ="✔ Wash the area with clean water and keep skin dry.<br>\
+        ✔ Apply aloe vera or calamine lotion to soothe irritation.<br>\
+        ⚠ Seek medical help if swelling, breathing trouble, or spreading rash occurs.<br>";
+        }
+        else if(issue === "insect bite"){
+        result ="✔ Wash the area and apply a cold compress to reduce swelling.<br>\
+        ✔ Apply aloe vera or anti-itch cream for relief.<br>\
+        ⚠ Seek medical help if severe swelling or breathing difficulty occurs.<br>";
+        }       
+        else if(issue === "sunburn"){
+        result ="✔ Cool the skin with a damp cloth or cool shower.<br>\
+        ✔ Apply aloe vera gel to soothe the skin.<br>\
+        ⚠ Avoid sun exposure and seek care if blisters or severe pain occur.<br>";
+        }
+        else if(issue === "muscle pain"){
+        result ="✔ Rest the affected area and avoid heavy activity.<br>\
+        ✔ Apply warm compress to relax muscles.<br>\
+        ⚠ See a doctor if pain lasts more than a few days or follows injury.<br>";
+        }
+        else if(issue === "indigestion" || issue === "acidity"){
+        result ="✔ Drink warm water or ginger tea for relief.<br>\
+        ✔ Eat light meals and avoid spicy or oily foods.<br>\
+        ⚠ Consult a doctor if symptoms are frequent or severe.<br>";
+        }
+        else if(issue === "cut" || issue === "wound"){
+        result ="✔ Clean the wound with clean water.<br>\
+        ✔ Apply antiseptic and cover with a clean bandage.<br>\
+        ⚠ Seek medical help for deep cuts or continuous bleeding.<br>";
+        }
+        else if(issue === "back pain"){
+        result ="✔ Rest and avoid heavy lifting.<br>\
+        ✔ Apply a warm compress to relax muscles.<br>\
+        ⚠ See a doctor if pain is severe or lasts more than a week.<br>";
+        }
+        else if(issue === "joint pain"){
+        result ="✔ Rest the joint and apply a warm compress.<br>\
+        ✔ Do gentle stretching exercises.<br>\
+        ⚠ Seek medical help if swelling or severe pain occurs.<br>";
+        }
+        else if(issue === "eye irritation"){
+        result ="✔ Rinse eyes gently with clean water.<br>\
+        ✔ Avoid rubbing the eyes.<br>\
+        ⚠ Consult a doctor if redness, pain, or blurred vision continues.<br>";
+        }
+        else if(issue === "dizziness"){
+        result ="✔ Sit or lie down immediately.<br>\
+        ✔ Drink water to prevent dehydration.<br>\
+        ⚠ Seek medical help if fainting or chest pain occurs.<br>";
+        }
+        else if(issue === "sore muscles"){
+        result ="✔ Rest the affected area.<br>\
+        ✔ Apply warm compress or gentle massage.<br>\
+        ⚠ See a doctor if swelling or severe pain persists.<br>";
+        }
+        else if(issue === "sprain"){
+        result ="✔ Rest the injured area.<br>\
+        ✔ Apply ice for 10-15 minutes to reduce swelling.<br>\
+        ⚠ Seek medical care if unable to move the joint.<br>";
+        }
+        else if(issue === "nausea"){
+        result ="✔ Take small sips of water or ginger tea.<br>\
+        ✔ Eat light, bland foods.<br>\
+        ⚠ See a doctor if vomiting continues or severe weakness occurs.<br>";
+        }
+        else if(issue === "dry skin"){
+        result ="✔ Apply moisturizer regularly.<br>\
+        ✔ Drink plenty of water.<br>\
+        ⚠ Consult a doctor if cracking or infection occurs.<br>";
+        }
+        else if(issue === "dry lips"){
+        result ="✔ Apply lip balm or coconut oil regularly to keep lips moisturized.<br>\
+        ✔ Drink plenty of water to prevent dehydration.<br>\
+        ⚠ Avoid licking lips frequently; see a doctor if cracks bleed or infection develops.<br>";
+        }
+        else if(issue === "dark circles"){
+        result ="✔ Sleep 7–8 hours daily and reduce screen time.<br>\
+        ✔ Apply cold cucumber slices or cold tea bags over eyes.<br>\
+        ⚠ Consult a doctor if dark circles persist due to allergies or health issues.<br>";
+        }
+        else if(issue === "pimple" || issue === "acne"){
+        result ="✔ Wash face twice daily and keep skin clean.<br>\
+        ✔ Apply aloe vera or turmeric paste for natural relief.<br>\
+        ⚠ Avoid squeezing pimples; see a doctor if severe acne develops.<br>";
+        }
+        else if(issue === "cracked heels"){
+        result ="✔ Soak feet in warm water and gently scrub dead skin.<br>\
+        ✔ Apply moisturizer, coconut oil, or petroleum jelly before sleep.<br>\
+        ⚠ Seek medical care if cracks bleed or cause severe pain.<br>";
+        }
+        else{
+            result = "Remedy not found.";
+        }
+    // ... include all other remedies exactly as in your original code
+
+    document.getElementById("result").innerHTML = result;
+}
+</script>
+
+</body>
+</html>
