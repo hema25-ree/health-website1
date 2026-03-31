@@ -16,6 +16,9 @@
         align-items:center;
         z-index: 999;
     }
+        #authBox {
+    margin-top: 100px;
+}
 
    .intro-card{
     background:white;
@@ -120,6 +123,18 @@
     </style>
 </head>
 <body>
+    <!-- LOGIN BOX -->
+<div id="authBox" class="card">
+    <h2>Login / Signup</h2>
+
+    <input type="text" id="username" placeholder="Enter Username"><br>
+    <input type="password" id="password" placeholder="Enter Password"><br>
+
+    <button onclick="signup()">Sign Up</button>
+    <button onclick="login()">Login</button>
+
+    <p id="authMsg"></p>
+</div>
     <!-- INTRO SCREEN -->
 <div id="introScreen">
     <div class="intro-card">
@@ -161,17 +176,61 @@
 </div>
 
 <button onclick="getRemedy()">Get Remedy</button>
+    <button onclick="showHistory()">📊 View History</button>
+<div id="historyBox"></div>
 
 
 
 <p id="result"></p>
 
 <p><b>Note:</b> For minor issues only. Consult a doctor if symptoms persist.</p>
+    function signup(){
+    let user = document.getElementById("username").value;
+    let pass = document.getElementById("password").value;
+
+    if(user === "" || pass === ""){
+        document.getElementById("authMsg").innerHTML = "⚠ Fill all fields";
+        return;
+    }
+
+    localStorage.setItem(user, pass);
+    document.getElementById("authMsg").innerHTML = "✅ Signup successful!";
+}
+
+function login(){
+    let user = document.getElementById("username").value;
+    let pass = document.getElementById("password").value;
+
+    let storedPass = localStorage.getItem(user);
+
+    if(storedPass === pass){
+        document.getElementById("authMsg").innerHTML = "✅ Login successful!";
+
+        localStorage.setItem("currentUser", user);
+
+        document.getElementById("authBox").style.display = "none";
+        document.getElementById("introScreen").style.display = "flex";
+    } else {
+        document.getElementById("authMsg").innerHTML = "❌ Invalid login";
+    }
+}
 
 <script>
     function startApp(){
     document.getElementById("introScreen").style.display = "none";
     document.getElementById("mainApp").style.display = "block";
+}
+    function showHistory(){
+    let user = localStorage.getItem("currentUser");
+    let history = JSON.parse(localStorage.getItem(user + "_history")) || [];
+
+    let output = "<h3>Your Health History</h3>";
+
+    history.forEach(item => {
+        output += "🩺 " + item.issue + " - " + item.date + "<br>";
+    });
+
+    document.getElementById("historyBox").innerHTML = output;
 }
 // List of issues for autocomplete
 const issues = [
@@ -556,6 +615,18 @@ function getRemedy(){
     // ... include all other remedies exactly as in your original code
 
     document.getElementById("result").innerHTML = result;
+    let user = localStorage.getItem("currentUser");
+
+if(user){
+    let history = JSON.parse(localStorage.getItem(user + "_history")) || [];
+
+    history.push({
+        issue: issue,
+        date: new Date().toLocaleString()
+    });
+
+    localStorage.setItem(user + "_history", JSON.stringify(history));
+}
 }
 </script>
     </div>
