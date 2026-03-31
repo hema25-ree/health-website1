@@ -184,67 +184,58 @@
 <p id="result"></p>
 
 <p><b>Note:</b> For minor issues only. Consult a doctor if symptoms persist.</p>
-    
-   function signup(){
-    let user = document.getElementById("username").value.trim();
-    let pass = document.getElementById("password").value.trim();
-
-    if(user === "" || pass === ""){
-        document.getElementById("authMsg").innerHTML = "⚠ Fill all fields";
-        return;
-    }
-
-    // Check if user already exists
-    if(localStorage.getItem(user)){
-        document.getElementById("authMsg").innerHTML = "❌ User already exists. Please login.";
-        return;
-    }
-
-    // Save user
-    localStorage.setItem(user, pass);
-
-    document.getElementById("authMsg").innerHTML = "✅ Signup successful! Now login.";
-
-    // Clear fields
-    document.getElementById("username").value = "";
-    document.getElementById("password").value = "";
-}
-    
-
-    localStorage.setItem(user, pass);
-    document.getElementById("authMsg").innerHTML = "✅ Signup successful!";
-}
-
-function login(){
-    function login(){
-    let user = document.getElementById("username").value.trim();
-    let pass = document.getElementById("password").value.trim();
-
-    let storedPass = localStorage.getItem(user);
-
-    if(storedPass === null){
-        document.getElementById("authMsg").innerHTML = "❌ User not found. Please sign up.";
-        return;
-    }
-
-    if(storedPass === pass){
-        document.getElementById("authMsg").innerHTML = "✅ Login successful!";
-
-        localStorage.setItem("currentUser", user);
-
-        document.getElementById("authBox").style.display = "none";
-        document.getElementById("introScreen").style.display = "flex";
-    } else {
-        document.getElementById("authMsg").innerHTML = "❌ Wrong password";
-    }
-}
-}
 
 <script>
-    function startApp(){
-    document.getElementById("introScreen").style.display = "none";
-    document.getElementById("mainApp").style.display = "block";
-}
+     function signup(){
+            let user = document.getElementById("username").value.trim();
+            let pass = document.getElementById("password").value.trim();
+
+            if(user === "" || pass === ""){
+                document.getElementById("authMsg").innerHTML = "⚠ Fill all fields";
+                return;
+            }
+
+            if(localStorage.getItem(user)){
+                document.getElementById("authMsg").innerHTML = "❌ User already exists. Please login.";
+                return;
+            }
+
+            localStorage.setItem(user, pass);
+            document.getElementById("authMsg").innerHTML = "✅ Signup successful! Now login.";
+
+            document.getElementById("username").value = "";
+            document.getElementById("password").value = "";
+        }
+
+        function login(){
+            let user = document.getElementById("username").value.trim();
+            let pass = document.getElementById("password").value.trim();
+
+            let storedPass = localStorage.getItem(user);
+
+            if(storedPass === null){
+                document.getElementById("authMsg").innerHTML = "❌ User not found. Please sign up.";
+                return;
+            }
+
+            if(storedPass === pass){
+                document.getElementById("authMsg").innerHTML = "✅ Login successful!";
+
+                localStorage.setItem("currentUser", user);
+
+                document.getElementById("authBox").style.display = "none";
+                document.getElementById("introScreen").style.display = "flex";
+            } else {
+                document.getElementById("authMsg").innerHTML = "❌ Wrong password";
+            }
+        }
+
+        function startApp(){
+            document.getElementById("introScreen").style.display = "none";
+            document.getElementById("mainApp").style.display = "block";
+        }
+
+
     function showHistory(){
     let user = localStorage.getItem("currentUser");
     let history = JSON.parse(localStorage.getItem(user + "_history")) || [];
