@@ -91,7 +91,7 @@
         border-radius: 8px;
         }
 
-        }
+        
         .suggestion-box {
             border: 1px solid #7db268;
             max-width: 220px;
@@ -279,7 +279,7 @@ function showSuggestions() {
 
                 toggleAgeWeight(item);
                 
-                getRemedy();
+                
             };
             box.appendChild(div);
         }
@@ -644,6 +644,9 @@ if(user){
     localStorage.setItem(user + "_history", JSON.stringify(history));
 }
 }
+    document.getElementById("issueInput").addEventListener("input", function(){
+    toggleAgeWeight(this.value);
+});
 </script>
     </div>
 
