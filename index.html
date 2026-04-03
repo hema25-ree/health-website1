@@ -124,7 +124,7 @@
 </head>
 <body>
     <!-- LOGIN BOX -->
-<div id="authBox" class="card">
+<div id="authBox" class="card" style="display:none;">
     <h2>Login / Signup</h2>
 
     <input type="text" id="username" placeholder="Enter Username"><br>
@@ -224,7 +224,7 @@
                 localStorage.setItem("currentUser", user);
 
                 document.getElementById("authBox").style.display = "none";
-                document.getElementById("introScreen").style.display = "flex";
+                document.getElementById("introScreen").style.display = "block";
             } else {
                 document.getElementById("authMsg").innerHTML = "❌ Wrong password";
             }
