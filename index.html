@@ -200,17 +200,17 @@
             let pass = document.getElementById("password").value.trim();
 
             if(user === "" || pass === ""){
-                document.getElementById("authMsg").innerHTML = "⚠ Fill all fields";
+                alert("⚠ Fill all fields");
                 return;
             }
 
             if(localStorage.getItem(user)){
-                document.getElementById("authMsg").innerHTML = "❌ User already exists. Please login.";
+                alert("❌ User already exists. Please login.");
                 return;
             }
 
             localStorage.setItem(user, pass);
-            document.getElementById("authMsg").innerHTML = "✅ Signup successful! Now login.";
+            alert("✅ Signup successful! Now login.");
 
             document.getElementById("username").value = "";
             document.getElementById("password").value = "";
@@ -223,19 +223,23 @@
             let storedPass = localStorage.getItem(user);
 
             if(storedPass === null){
-                document.getElementById("authMsg").innerHTML = "❌ User not found. Please sign up.";
+                alert("❌ User not found. Please sign up.");
                 return;
             }
 
             if(storedPass === pass){
-                document.getElementById("authMsg").innerHTML = "✅ Login successful!";
+              localStorage.setItem("currentUser", user);
 
-                localStorage.setItem("currentUser", user);
+        // Hide auth box and intro, show main app
+        document.getElementById("authBox").style.display = "none";
+        document.getElementById("introScreen").style.display = "none";
+        document.getElementById("mainApp").style.display = "block";
 
-                document.getElementById("authBox").style.display = "none";
-                document.getElementById("introScreen").style.display = "flex";
+        // Show history button only for logged in users
+        document.querySelector("button[onclick='showHistory()']").style.display = "inline-block";
+ 
             } else {
-                document.getElementById("authMsg").innerHTML = "❌ Wrong password";
+                 alert("❌ Wrong password");
             }
         }
 
@@ -664,11 +668,20 @@ if(user){
 }
 }
      window.onload = function() {
-        let user = localStorage.getItem("currentUser");
-        if(!user){
-            document.querySelector("button[onclick='showHistory()']").style.display = "none";
-        }
-    };
+    let user = localStorage.getItem("currentUser");
+
+    // If already logged in, skip intro/login and show main app
+    if(user){
+        document.getElementById("introScreen").style.display = "none";
+        document.getElementById("authBox").style.display = "none";
+        document.getElementById("mainApp").style.display = "block";
+
+        document.querySelector("button[onclick='showHistory()']").style.display = "inline-block";
+    } else {
+        // Not logged in
+        document.querySelector("button[onclick='showHistory()']").style.display = "none";
+    }
+};
 </script>
     </div>
 
