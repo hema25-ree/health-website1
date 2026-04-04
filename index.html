@@ -45,7 +45,7 @@
         .card {
             background: rgba(255,255,255,0.9);
             width: 350px;
-            margin: 60px auto;
+            margin: 120px auto;
             padding: 25px;
             border-radius: 15px;
             box-shadow: 0 8px 25px rgba(0,0,0,0.3);
@@ -120,9 +120,20 @@
   display:none;
   box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
+        #mainTitle {
+    position: fixed;
+    top: 10px;
+    width: 100%;
+    text-align: center;
+    color: #079694;
+    font-size: 40px;
+    font-weight: bold;
+    z-index: 1000;
+}
     </style>
 </head>
 <body>
+    <h1 id="mainTitle">🌿 Health Remedy Assistant</h1>
     <!-- LOGIN BOX -->
 <div id="authBox" class="card" style="display:none;">
     <h2>Login / Signup</h2>
@@ -149,7 +160,7 @@
     </div>
 </div>
 
-<h1>Health Remedy Assistant</h1>
+
     <div id="mainApp" style="display:none;">
 
 <div class="card">
