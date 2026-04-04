@@ -749,7 +749,7 @@ if(user){
 };
    let resultHTML = `
     <h3>Issue: ${issue}</h3>
-    <p>${remedy}</p>
+    <p>${result}</p>
 `;
 
 document.getElementById("resultContent").innerHTML = resultHTML;
@@ -758,15 +758,15 @@ showPage("resultPage");
      
 
 };
-     function goBack(){
-    showPage("mainApp");
-}
-   
+
 
 
     document.getElementById("issueInput").addEventListener("input", function(){
     toggleAgeWeight(this.value);
 });
+    function goBack(){
+    showPage("mainApp");
+}
 </script>
     </div>
     <div id="resultPage" style="display:none; background:white;">
