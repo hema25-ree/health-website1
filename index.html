@@ -178,13 +178,10 @@
     align-items: center !important;
     width: 350px !important;
 }
-    #authBox, #mainApp, #introScreen {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}</style>
+        #mainApp, #authBox, #introScreen {
+    min-height: 100vh;
+}
+   </style>
 </head>
 <body>
     <h1 id="mainTitle">🌿 Health Remedy Assistant</h1>
@@ -255,7 +252,18 @@
 <p><b>Note:</b> For minor issues only. Consult a doctor if symptoms persist.</p>
 
 <script>
-    
+    function showPage(pageId) {
+    // Hide all screens
+    document.getElementById("introScreen").style.display = "none";
+    document.getElementById("authBox").style.display = "none";
+    document.getElementById("mainApp").style.display = "none";
+
+    // Show selected screen
+    document.getElementById(pageId).style.display = "flex";
+
+    // 🔥 Scroll to top (THIS FIXES YOUR ISSUE)
+    window.scrollTo(0, 0);
+}
      function signup(){
             console.log("Signup clicked");
             let user = document.getElementById("username").value.trim();
@@ -277,9 +285,7 @@
             document.getElementById("authMsg").innerHTML = "✅ Signup successful! Logging you in...";
 
 
-            document.getElementById("authBox").style.display = "none";
-            document.getElementById("introScreen").style.display = "none";
-            document.getElementById("mainApp").style.display = "block";
+            showPage("mainApp");
         }
 
         function login(){
@@ -298,18 +304,17 @@
 
                 localStorage.setItem("currentUser", user);
 
-                document.getElementById("authBox").style.display = "none";
-                document.getElementById("introScreen").style.display = "none";
-                document.getElementById("mainApp").style.display = "block";
+                showPage("mainApp");
             } else {
                 document.getElementById("authMsg").innerHTML = "❌ Wrong password";
             }
         }
 
-        function startApp(){
-            document.getElementById("introScreen").style.display = "none";
-            document.getElementById("authBox").style.display = "flex";
-        }
+        
+           function startApp(){
+    showPage("authBox");
+}
+        
 
 
     function showHistory(){
