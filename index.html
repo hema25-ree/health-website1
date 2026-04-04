@@ -196,7 +196,7 @@
 }
    </style>
 </head>
-<body>
+<body onload="document.getElementById('introScreen').style.display='flex'">
     <h1 id="mainTitle">🌿 Health Remedy Assistant</h1>
         <!-- INTRO SCREEN -->
 <div id="introScreen">
@@ -285,6 +285,11 @@
 
     // 🔥 Scroll to top (THIS FIXES YOUR ISSUE)
     window.scrollTo(0, 0);
+}
+    function startApp() {
+    // Hide intro screen, show login/signup page
+    document.getElementById("introScreen").style.display = "none";
+    showPage("authBox");
 }
      function signup(){
             
