@@ -40,6 +40,7 @@
             background-position: center;
             background-repeat: no-repeat;
             background-attachment: fixed;
+            padding-top: 80px;
         }
         /* Center Card */
         .card {
@@ -120,17 +121,19 @@
   display:none;
   box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
-        #mainTitle {
-    position: fixed;
-    top: 10px;
+       #mainTitle {
+    position: fixed;   /* 🔥 makes it stay in place */
+    top: 0;
+    left: 0;
     width: 100%;
+    background: white; /* prevents overlap issues */
     text-align: center;
     color: #079694;
     font-size: 40px;
     font-weight: bold;
+    padding: 10px 0;
     z-index: 1000;
-}
-    </style>
+}  </style>
 </head>
 <body>
     <h1 id="mainTitle">🌿 Health Remedy Assistant</h1>
