@@ -137,7 +137,7 @@
 </div>
     <!-- INTRO SCREEN -->
 <div id="introScreen">
-    <div class="intro-card">
+    <div class="intro-card" style="display:none;">
         <h1>🌿 Health Remedy Assistant</h1>
         <p>Your smart guide to simple home remedies</p>
 
@@ -644,6 +644,21 @@ if(user){
 
     localStorage.setItem(user + "_history", JSON.stringify(history));
 }
+    window.onload = function(){
+    let user = localStorage.getItem("currentUser");
+
+    if(user){
+        // Already logged in → go directly to app
+        document.getElementById("introScreen").style.display = "none";
+        document.getElementById("authBox").style.display = "none";
+        document.getElementById("mainApp").style.display = "block";
+    } else {
+        // Not logged in → show intro
+        document.getElementById("introScreen").style.display = "flex";
+        document.getElementById("authBox").style.display = "none";
+        document.getElementById("mainApp").style.display = "none";
+    }
+};
 }
     document.getElementById("issueInput").addEventListener("input", function(){
     toggleAgeWeight(this.value);
