@@ -232,7 +232,7 @@
 
         // Hide auth box and intro, show main app
         document.getElementById("authBox").style.display = "none";
-        document.getElementById("introScreen").style.display = "none";
+        
         document.getElementById("mainApp").style.display = "block";
 
         // Show history button only for logged in users
@@ -667,21 +667,21 @@ if(user){
     localStorage.setItem(user + "_history", JSON.stringify(history));
 }
 }
-     window.onload = function() {
+ window.onload = function() {
     let user = localStorage.getItem("currentUser");
 
-    // If already logged in, skip intro/login and show main app
-    if(user){
+    // Only hide history button if user is not logged in
+    if(!user){
+        document.querySelector("button[onclick='showHistory()']").style.display = "none";
+    } else {
+        // Optional: you can auto-show main app if you want
         document.getElementById("introScreen").style.display = "none";
         document.getElementById("authBox").style.display = "none";
         document.getElementById("mainApp").style.display = "block";
 
         document.querySelector("button[onclick='showHistory()']").style.display = "inline-block";
-    } else {
-        // Not logged in
-        document.querySelector("button[onclick='showHistory()']").style.display = "none";
     }
-};
+};   
 </script>
     </div>
 
