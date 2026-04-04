@@ -738,15 +738,7 @@ if(user){
 
     localStorage.setItem(user + "_history", JSON.stringify(history));
 }
-    window.onload = function(){
-    let user = localStorage.getItem("currentUser");
-
-    if(user){
-        showPage("mainApp");   // ✅ use your function
-    } else {
-        showPage("introScreen");
-    }
-};
+   
    let resultHTML = `
     <h3>Issue: ${issue}</h3>
     <p>${result}</p>
@@ -757,6 +749,15 @@ document.getElementById("resultContent").innerHTML = resultHTML;
 showPage("resultPage"); 
      
 
+};
+     window.onload = function(){
+    let user = localStorage.getItem("currentUser");
+
+    if(user){
+        showPage("mainApp");   // ✅ use your function
+    } else {
+        showPage("introScreen");
+    }
 };
 
 
