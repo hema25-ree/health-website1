@@ -47,9 +47,9 @@
            background: white;
            width: 350px;
            margin: 120px auto;
-           padding: 30px 25px;
+           padding: 30px;
            border-radius: 20px;
-           box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+           box-shadow: 0 10px 25px rgba(0,0,0,0.2);
            text-align: center; 
         }
 
@@ -137,16 +137,16 @@
     padding: 10px 0;
     z-index: 1000;
 }
-    .auth-title {
-    color: #079694;
-    margin-bottom: 15px;
+.auth-title {
+    text-align: center;
+    width: 100%;
 }
 
 /* Better inputs */
 #authBox input {
     width: 85%;
     padding: 12px;
-    margin: 10px 0;
+    margin: 12px 0;
     border-radius: 10px;
     border: 1px solid #ccc;
     font-size: 14px;
@@ -155,9 +155,11 @@
 /* Button alignment */
 .btn-group {
     display: flex;
-    justify-content: space-between;
-    margin-top: 10px;
+    gap: 10px;              /* 🔥 better spacing */
+    width: 85%;
+    justify-content: center;
 }
+
 
 /* Buttons inside auth */
 #authBox button {
@@ -169,6 +171,18 @@
     margin-top: 10px;
     font-weight: bold;
     font-size: 14px;
+}
+    #authBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+}
+
+#authBox .card {
+    display: flex;
+    flex-direction: column;   /* 🔥 THIS FIXES EVERYTHING */
+    align-items: center;
 }</style>
 </head>
 <body>
