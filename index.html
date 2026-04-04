@@ -267,6 +267,7 @@
     document.getElementById("introScreen").style.display = "none";
     document.getElementById("authBox").style.display = "none";
     document.getElementById("mainApp").style.display = "none";
+    document.getElementById("resultPage").style.display = "none";
 
     // Show selected screen
     document.getElementById(pageId).style.display = "flex";
@@ -338,6 +339,9 @@
     });
 
     document.getElementById("historyBox").innerHTML = output;
+}
+    function goBack(){
+    showPage("mainApp");
 }
 // List of issues for autocomplete
 const issues = [
@@ -745,6 +749,14 @@ if(user){
         showPage("introScreen");
     }
 };
+   let resultHTML = `
+    <h3>Issue: ${issue}</h3>
+    <p>${remedy}</p>
+`;
+
+document.getElementById("resultContent").innerHTML = resultHTML;
+
+showPage("resultPage"); 
      
 
 };
@@ -756,6 +768,16 @@ if(user){
 });
 </script>
     </div>
+    <div id="resultPage" style="display:none; background:white;">
+    <div class="card">
+        <h2>Your Remedy</h2>
+
+        <div id="resultContent"></div>
+
+        <br>
+        <button onclick="goBack()">⬅ Back</button>
+    </div>
+</div>
 
 </body>
 
