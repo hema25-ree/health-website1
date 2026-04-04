@@ -201,10 +201,14 @@
             }
 
             localStorage.setItem(user, pass);
-            document.getElementById("authMsg").innerHTML = "✅ Signup successful! Now login.";
+            localStorage.setItem("currentUser", user);
 
-            document.getElementById("username").value = "";
-            document.getElementById("password").value = "";
+            document.getElementById("authMsg").innerHTML = "✅ Signup successful! Logging you in...";
+
+
+            document.getElementById("authBox").style.display = "none";
+            document.getElementById("introScreen").style.display = "none";
+            document.getElementById("mainApp").style.display = "block";
         }
 
         function login(){
