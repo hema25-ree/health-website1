@@ -224,7 +224,8 @@
                 localStorage.setItem("currentUser", user);
 
                 document.getElementById("authBox").style.display = "none";
-                document.getElementById("introScreen").style.display = "flex";
+                document.getElementById("introScreen").style.display = "none";
+                document.getElementById("mainApp").style.display = "block";
             } else {
                 document.getElementById("authMsg").innerHTML = "❌ Wrong password";
             }
