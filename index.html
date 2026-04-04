@@ -38,13 +38,12 @@
             background-position: center;
             background-repeat: no-repeat;
             background-attachment: fixed;
-            margin: 0;         
-            overflow: hidden;
+
            
         }
         /* Center Card */
         .card {
-           background: white;
+           background: rgba(255,255,255,0.9);
            width: 350px;
            margin: 120px auto;
            padding: 30px;
@@ -124,84 +123,27 @@
   display:none;
   box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
-       #mainTitle {
-    position: fixed;   /* 🔥 makes it stay in place */
-    top: 0;
-    left: 0;
-    width: 100%;
-    background: white; /* prevents overlap issues */
-    text-align: center;
-    color: #079694;
-    font-size: 40px;
-    font-weight: bold;
-    padding: 10px 0;
-    z-index: 1000;
-}
-.auth-title {
-    text-align: center;
-    width: 100%;
-}
-
-/* Better inputs */
-#authBox input {
-    width: 90% !important;
-    margin: 10px 0 !important;
-}
-
-/* Buttons row */
-.btn-group {
-    display: flex !important;
-    justify-content: space-between !important;
-    width: 90% !important;
-}
-
-
-/* Buttons inside auth */
-#authBox button {
-    width: 48% !important;
-}
-
-/* Message */
-#authMsg {
-    margin-top: 10px;
-    font-weight: bold;
-    font-size: 14px;
-}
-    #authBox {
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-    height: 80vh !important;
-}
-
-#authBox .card {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    width: 350px !important;
-}
-#introScreen,
-#authBox,
-#mainApp {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-
-    display: none;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
    </style>
 </head>
-<body onload="document.getElementById('introScreen').style.display='flex'">
-    <h1 id="mainTitle">🌿 Health Remedy Assistant</h1>
+<body>
+    <!-- LOGIN BOX -->
+<div id="authBox">
+    <div class="card">
+    <h2 class="auth-title">Welcome 👋</h2>
+
+<input type="text" id="username" placeholder="👤 Username">
+<input type="password" id="password" placeholder="🔒 Password">
+<br>
+        <button onclick="login()">Login</button>
+    <button onclick="signup()">Sign Up</button>
+        <p id="authMsg"></p>
+    
+</div>
+        
         <!-- INTRO SCREEN -->
 <div id="introScreen">
     <div class="intro-card">
-        
+        <h1>🌿 Health Remedy Assistant</h1>
         <p>Your smart guide to simple home remedies</p>
 
         <img src="https://images.unsplash.com/photo-1584515933487-779824d29309?w=500" width="220">
@@ -211,27 +153,9 @@
         <button onclick="startApp()">Start</button>
     </div>
 </div>
-    <!-- LOGIN BOX -->
-<div id="authBox">
-    <div class="card">
-    <h2 class="auth-title">Welcome 👋</h2>
+ <h1>Health Remedy Assistant</h1>
+    <div id="mainApp" style="display:none;">
 
-<input type="text" id="username" placeholder="👤 Username">
-<input type="password" id="password" placeholder="🔒 Password">
-
-<div class="btn-group">
-    <button onclick="login()">Login</button>
-    <button onclick="signup()">Sign Up</button>
-</div>
-
-<p id="authMsg"></p>
-    
-</div>
-</div>
-
-
-
-<div id="mainApp">
 <div class="card">
 
 <!-- STEP 1: Health Issue -->
@@ -239,7 +163,7 @@
 <div id="suggestions" class="suggestion-box"></div>
 
 
-
+<br>
 
 <!-- STEP 2 & 3: Age Group and Weight (conditionally shown) -->
 <div id="ageWeightFields" style="display:block;">
@@ -256,43 +180,17 @@
 </div>
 
 <button onclick="getRemedy()">Get Remedy</button>
-<button onclick="showHistory()">📊 View History</button>
+    <button onclick="showHistory()">📊 View History</button>
 <div id="historyBox"></div>
-</div>
-
-    <!-- REMEDY PAGE -->
-    <div id="remedyPage">
-        <div class="card">
-            <h2>Remedy</h2>
-            <div id="result"></div>
-            <button onclick="showPage('mainApp')">⬅ Back</button>
-        </div>
-    </div>
 
 
 
+<p id="result"></p>
+
+<p><b>Note:</b> For minor issues only. Consult a doctor if symptoms persist.</p>
 
 <script>
-    function showPage(pageId) {
-    // Hide all screens
-    document.getElementById("introScreen").style.display = "none";
-    document.getElementById("authBox").style.display = "none";
-    document.getElementById("mainApp").style.display = "none";
-    document.getElementById("remedyPage").style.display = "none";
-
-    // Show selected screen
-    document.getElementById(pageId).style.display = "flex";
-
-    // 🔥 Scroll to top (THIS FIXES YOUR ISSUE)
-    window.scrollTo(0, 0);
-}
-    function startApp() {
-    // Hide intro screen, show login/signup page
-    document.getElementById("introScreen").style.display = "none";
-    showPage("authBox");
-}
      function signup(){
-            
             let user = document.getElementById("username").value.trim();
             let pass = document.getElementById("password").value.trim();
 
@@ -307,13 +205,10 @@
             }
 
             localStorage.setItem(user, pass);
-            localStorage.setItem("currentUser", user);
-            localStorage.setItem(user+"_history", JSON.stringify([]));
+            document.getElementById("authMsg").innerHTML = "✅ Signup successful! Now login.";
 
-            document.getElementById("authMsg").innerHTML = "✅ Signup successful! Logging you in...";
-
-
-            showPage("mainApp");
+            document.getElementById("username").value = "";
+            document.getElementById("password").value = "";
         }
 
         function login(){
@@ -332,26 +227,31 @@
 
                 localStorage.setItem("currentUser", user);
 
-                showPage("mainApp");
+                document.getElementById("authBox").style.display = "none";
+                document.getElementById("introScreen").style.display = "flex";
             } else {
                 document.getElementById("authMsg").innerHTML = "❌ Wrong password";
             }
-        }  
+        }
+
+        function startApp(){
+            document.getElementById("introScreen").style.display = "none";
+            document.getElementById("mainApp").style.display = "block";
+        }
 
 
     function showHistory(){
     let user = localStorage.getItem("currentUser");
     let history = JSON.parse(localStorage.getItem(user + "_history")) || [];
-    if(history.length === 0){ alert("No history yet."); return; }
+
     let output = "<h3>Your Health History</h3>";
 
     history.forEach(item => {
         output += "🩺 " + item.issue + " - " + item.date + "<br>";
     });
 
-    alert(output);
+    document.getElementById("historyBox").innerHTML = output;
 }
-   
 // List of issues for autocomplete
 const issues = [
     "fever","cold","cough","sore throat","weakness","vomiting","diarrhea","stomach pain",
@@ -361,8 +261,6 @@ const issues = [
     "sprain","dizziness","nausea","eye irritation","sore muscles"
 ];
 
-
-    
 
 
 // Issues that require age and weight
@@ -385,8 +283,8 @@ function showSuggestions() {
 
                 toggleAgeWeight(item);
                 
-                
-            }
+                getRemedy();
+            };
             box.appendChild(div);
         }
     });
@@ -406,17 +304,25 @@ function toggleAgeWeight(issue){
 
 function getRemedy(){
     const issue = document.getElementById("issueInput").value.toLowerCase();
-    const age = document.getElementById("ageGroup").value;
-    const weight = parseFloat(document.getElementById("weight").value);
+    let age = document.getElementById("ageGroup").value;
+    let weight = parseFloat(document.getElementById("weight").value);
     let result = "";
 
     const requiresAW = weightRequiredIssues.includes(issue);
 
     // Validation
-    if(issue === ""){ alert("Enter issue"); return;}
-    if(requiresAW && age === ""){ alert("Select age"); return;}
-    if(requiresAW && !weight){ alert("Enter weight"); return;}
-
+    if(issue === ""){
+        document.getElementById("result").innerHTML = "⚠ Please enter a health issue.";
+        return;
+    }
+    if(requiresAW && age === ""){
+        document.getElementById("result").innerHTML = "⚠ Please select age group.";
+        return;
+    }
+    if(requiresAW && !weight){
+        document.getElementById("result").innerHTML = "⚠ Please enter weight.";
+        return;
+    }
 
     // Weight warnings
     let warning = "";
@@ -727,28 +633,29 @@ function getRemedy(){
             result = "Remedy not found.";
         }
     // ... include all other remedies exactly as in your original code
-let user = localStorage.getItem("currentUser");
-    let history = JSON.parse(localStorage.getItem(user+"_history")) || [];
-    let date = new Date().toLocaleString();
-    history.push({issue:issue, date: date});
-    localStorage.setItem(user+"_history", JSON.stringify(history));
 
     document.getElementById("result").innerHTML = result;
-    showPage("remedyPage");
-    
-};
+    let user = localStorage.getItem("currentUser");
 
+if(user){
+    let history = JSON.parse(localStorage.getItem(user + "_history")) || [];
 
+    history.push({
+        issue: issue,
+        date: new Date().toLocaleString()
+    });
 
-   
+    localStorage.setItem(user + "_history", JSON.stringify(history));
+}
+}
 </script>
-   
+    </div>
 
 </body>
 
-</html>
+</html>   
 
-
+    
 
 
 
