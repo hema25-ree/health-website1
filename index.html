@@ -129,6 +129,19 @@
    </style>
 </head>
 <body>
+           <!-- INTRO SCREEN -->
+<div id="introScreen">
+    <div class="intro-card">
+        <h1>🌿 Health Remedy Assistant</h1>
+        <p>Your smart guide to simple home remedies</p>
+
+        <img src="https://images.unsplash.com/photo-1584515933487-779824d29309?w=500" width="220">
+
+        <br><br>
+
+        <button onclick="startApp()">Start</button>
+    </div>
+</div>
     <!-- LOGIN BOX -->
 <div class="container">
   <h1 class="title">🌿Health Remedy Assistant</h1>
@@ -145,19 +158,7 @@
    </div> 
 </div>
         
-        <!-- INTRO SCREEN -->
-<div id="introScreen">
-    <div class="intro-card">
-        <h1>🌿 Health Remedy Assistant</h1>
-        <p>Your smart guide to simple home remedies</p>
-
-        <img src="https://images.unsplash.com/photo-1584515933487-779824d29309?w=500" width="220">
-
-        <br><br>
-
-        <button onclick="startApp()">Start</button>
-    </div>
-</div>
+ 
 
     <div id="mainApp" style="display:none;">
 
@@ -727,22 +728,19 @@ window.onload = function() {
     let user = localStorage.getItem("currentUser");
 
     if(user){
-        // User already logged in: skip intro and login, show main app
         document.getElementById("introScreen").style.display = "none";
         document.getElementById("authBox").style.display = "none";
         document.getElementById("mainApp").style.display = "block";
-
-        // Show history button
         document.querySelector("button[onclick='showHistory()']").style.display = "inline-block";
     } else {
-        // Not logged in: show intro screen, hide main app & history button
         document.getElementById("introScreen").style.display = "flex";
         document.getElementById("authBox").style.display = "none";
         document.getElementById("mainApp").style.display = "none";
-
         document.querySelector("button[onclick='showHistory()']").style.display = "none";
     }
 };
+
+
 </script>
 </script>
     </div>
