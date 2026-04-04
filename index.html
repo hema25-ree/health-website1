@@ -244,13 +244,23 @@
             document.getElementById("mainApp").style.display = "block";
         }
 
+function showHistory(){
+    let user = localStorage.getItem("currentUser"); // get currently logged-in user
 
-    function showHistory(){
-    let user = localStorage.getItem("currentUser");
+    if(!user){ 
+        // if no user is logged in
+        alert("⚠ You must be logged in to view history!");
+        return; 
+    }
+
     let history = JSON.parse(localStorage.getItem(user + "_history")) || [];
 
-    let output = "<h3>Your Health History</h3>";
+    if(history.length === 0){
+        document.getElementById("historyBox").innerHTML = "<p>No history found.</p>";
+        return;
+    }
 
+    let output = "<h3>Your Health History</h3>";
     history.forEach(item => {
         output += "🩺 " + item.issue + " - " + item.date + "<br>";
     });
@@ -653,6 +663,12 @@ if(user){
     localStorage.setItem(user + "_history", JSON.stringify(history));
 }
 }
+     window.onload = function() {
+        let user = localStorage.getItem("currentUser");
+        if(!user){
+            document.querySelector("button[onclick='showHistory()']").style.display = "none";
+        }
+    };
 </script>
     </div>
 
