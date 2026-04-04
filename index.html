@@ -144,26 +144,21 @@
 
 /* Better inputs */
 #authBox input {
-    width: 85%;
-    padding: 12px;
-    margin: 12px 0;
-    border-radius: 10px;
-    border: 1px solid #ccc;
-    font-size: 14px;
+    width: 90% !important;
+    margin: 10px 0 !important;
 }
 
-/* Button alignment */
+/* Buttons row */
 .btn-group {
-    display: flex;
-    gap: 10px;              /* 🔥 better spacing */
-    width: 85%;
-    justify-content: center;
+    display: flex !important;
+    justify-content: space-between !important;
+    width: 90% !important;
 }
 
 
 /* Buttons inside auth */
 #authBox button {
-    width: 48%;
+    width: 48% !important;
 }
 
 /* Message */
@@ -173,22 +168,24 @@
     font-size: 14px;
 }
     #authBox {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 80vh;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    height: 80vh !important;
 }
 
 #authBox .card {
-    display: flex;
-    flex-direction: column;   /* 🔥 THIS FIXES EVERYTHING */
-    align-items: center;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    width: 350px !important;
 }</style>
 </head>
 <body>
     <h1 id="mainTitle">🌿 Health Remedy Assistant</h1>
     <!-- LOGIN BOX -->
-<div id="authBox" class="card" style="display:none;">
+<div id="authBox" style="display:none;">
+    <div class="card">
     <h2 class="auth-title">Welcome 👋</h2>
 
 <input type="text" id="username" placeholder="👤 Username">
