@@ -726,24 +726,20 @@ if(user){
 
     localStorage.setItem(user + "_history", JSON.stringify(history));
 }
-     window.onload = function(){
+    window.onload = function(){
     let user = localStorage.getItem("currentUser");
 
     if(user){
-        // Show main app
-        document.getElementById("introScreen").style.display = "none";
-        document.getElementById("authBox").style.display = "none";
-        document.getElementById("mainApp").style.display = "block";
+        showPage("mainApp");   // ✅ use your function
     } else {
-        // Show intro screen
-        document.getElementById("introScreen").style.display = "flex";
-        document.getElementById("authBox").style.display = "none";
-        document.getElementById("mainApp").style.display = "none";
+        showPage("introScreen");
     }
+};
+     
 
 };
    
-};
+
 
     document.getElementById("issueInput").addEventListener("input", function(){
     toggleAgeWeight(this.value);
