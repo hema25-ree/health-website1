@@ -197,6 +197,20 @@
 <p><b>Note:</b> For minor issues only. Consult a doctor if symptoms persist.</p>
 
 <script>
+     window.onload = function(){
+    let user = localStorage.getItem("currentUser");
+
+    if(user){
+        // Show main app
+        document.getElementById("introScreen").style.display = "none";
+        document.getElementById("authBox").style.display = "none";
+        document.getElementById("mainApp").style.display = "block";
+    } else {
+        // Show intro screen
+        document.getElementById("introScreen").style.display = "flex";
+        document.getElementById("authBox").style.display = "none";
+        document.getElementById("mainApp").style.display = "none";
+    }
      function signup(){
             console.log("Signup clicked");
             let user = document.getElementById("username").value.trim();
@@ -660,20 +674,7 @@ if(user){
 
     localStorage.setItem(user + "_history", JSON.stringify(history));
 }
-    window.onload = function(){
-    let user = localStorage.getItem("currentUser");
 
-    if(user){
-        // Show main app
-        document.getElementById("introScreen").style.display = "none";
-        document.getElementById("authBox").style.display = "none";
-        document.getElementById("mainApp").style.display = "block";
-    } else {
-        // Show intro screen
-        document.getElementById("introScreen").style.display = "flex";
-        document.getElementById("authBox").style.display = "none";
-        document.getElementById("mainApp").style.display = "none";
-    }
 };
    
 };
