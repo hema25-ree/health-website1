@@ -190,13 +190,29 @@
     height: 100%;
 
     display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
    </style>
 </head>
 <body>
     <h1 id="mainTitle">🌿 Health Remedy Assistant</h1>
+        <!-- INTRO SCREEN -->
+<div id="introScreen">
+    <div class="intro-card">
+        
+        <p>Your smart guide to simple home remedies</p>
+
+        <img src="https://images.unsplash.com/photo-1584515933487-779824d29309?w=500" width="220">
+
+        <br><br>
+
+        <button onclick="startApp()">Start</button>
+    </div>
+</div>
     <!-- LOGIN BOX -->
-<div id="authBox" style="display:none;">
+<div id="authBox">
     <div class="card">
     <h2 class="auth-title">Welcome 👋</h2>
 
@@ -212,22 +228,10 @@
     
 </div>
 </div>
-    <!-- INTRO SCREEN -->
-<div id="introScreen">
-    <div class="intro-card">
-        
-        <p>Your smart guide to simple home remedies</p>
-
-        <img src="https://images.unsplash.com/photo-1584515933487-779824d29309?w=500" width="220">
-
-        <br><br>
-
-        <button onclick="startApp()">Start</button>
-    </div>
-</div>
 
 
-<div id="mainApp" style="display:none; background:white;">
+
+<div id="mainApp">
 <div class="card">
 
 <!-- STEP 1: Health Issue -->
@@ -235,7 +239,7 @@
 <div id="suggestions" class="suggestion-box"></div>
 
 
-<br>
+
 
 <!-- STEP 2 & 3: Age Group and Weight (conditionally shown) -->
 <div id="ageWeightFields" style="display:block;">
@@ -252,14 +256,21 @@
 </div>
 
 <button onclick="getRemedy()">Get Remedy</button>
-    <button onclick="showHistory()">📊 View History</button>
+<button onclick="showHistory()">📊 View History</button>
 <div id="historyBox"></div>
+</div>
+
+    <!-- REMEDY PAGE -->
+    <div id="remedyPage">
+        <div class="card">
+            <h2>Remedy</h2>
+            <div id="result"></div>
+            <button onclick="showPage('mainApp')">⬅ Back</button>
+        </div>
+    </div>
 
 
 
-<p id="result"></p>
-
-<p><b>Note:</b> For minor issues only. Consult a doctor if symptoms persist.</p>
 
 <script>
     function showPage(pageId) {
@@ -267,7 +278,7 @@
     document.getElementById("introScreen").style.display = "none";
     document.getElementById("authBox").style.display = "none";
     document.getElementById("mainApp").style.display = "none";
-    document.getElementById("resultPage").style.display = "none";
+    document.getElementById("remedyPage").style.display = "none";
 
     // Show selected screen
     document.getElementById(pageId).style.display = "flex";
@@ -276,7 +287,7 @@
     window.scrollTo(0, 0);
 }
      function signup(){
-            console.log("Signup clicked");
+            
             let user = document.getElementById("username").value.trim();
             let pass = document.getElementById("password").value.trim();
 
@@ -292,6 +303,7 @@
 
             localStorage.setItem(user, pass);
             localStorage.setItem("currentUser", user);
+            localStorage.setItem(user+"_history", JSON.stringify([]));
 
             document.getElementById("authMsg").innerHTML = "✅ Signup successful! Logging you in...";
 
@@ -319,26 +331,20 @@
             } else {
                 document.getElementById("authMsg").innerHTML = "❌ Wrong password";
             }
-        }
-
-        
-           function startApp(){
-    showPage("authBox");
-}
-        
+        }  
 
 
     function showHistory(){
     let user = localStorage.getItem("currentUser");
     let history = JSON.parse(localStorage.getItem(user + "_history")) || [];
-
+    if(history.length === 0){ alert("No history yet."); return; }
     let output = "<h3>Your Health History</h3>";
 
     history.forEach(item => {
         output += "🩺 " + item.issue + " - " + item.date + "<br>";
     });
 
-    document.getElementById("historyBox").innerHTML = output;
+    alert(output);
 }
    
 // List of issues for autocomplete
@@ -375,7 +381,7 @@ function showSuggestions() {
                 toggleAgeWeight(item);
                 
                 
-            };
+            }
             box.appendChild(div);
         }
     });
@@ -395,25 +401,17 @@ function toggleAgeWeight(issue){
 
 function getRemedy(){
     const issue = document.getElementById("issueInput").value.toLowerCase();
-    let age = document.getElementById("ageGroup").value;
-    let weight = parseFloat(document.getElementById("weight").value);
+    const age = document.getElementById("ageGroup").value;
+    const weight = parseFloat(document.getElementById("weight").value);
     let result = "";
 
     const requiresAW = weightRequiredIssues.includes(issue);
 
     // Validation
-    if(issue === ""){
-        document.getElementById("result").innerHTML = "⚠ Please enter a health issue.";
-        return;
-    }
-    if(requiresAW && age === ""){
-        document.getElementById("result").innerHTML = "⚠ Please select age group.";
-        return;
-    }
-    if(requiresAW && !weight){
-        document.getElementById("result").innerHTML = "⚠ Please enter weight.";
-        return;
-    }
+    if(issue === ""){ alert("Enter issue"); return;}
+    if(requiresAW && age === ""){ alert("Select age"); return;}
+    if(requiresAW && !weight){ alert("Enter weight"); return;}
+
 
     // Weight warnings
     let warning = "";
@@ -724,62 +722,22 @@ function getRemedy(){
             result = "Remedy not found.";
         }
     // ... include all other remedies exactly as in your original code
+let user = localStorage.getItem("currentUser");
+    let history = JSON.parse(localStorage.getItem(user+"_history")) || [];
+    let date = new Date().toLocaleString();
+    history.push({issue:issue, date: date});
+    localStorage.setItem(user+"_history", JSON.stringify(history));
 
     document.getElementById("result").innerHTML = result;
-    let user = localStorage.getItem("currentUser");
+    showPage("remedyPage");
+    
+};
 
-if(user){
-    let history = JSON.parse(localStorage.getItem(user + "_history")) || [];
 
-    history.push({
-        issue: issue,
-        date: new Date().toLocaleString()
-    });
 
-    localStorage.setItem(user + "_history", JSON.stringify(history));
-}
    
-   let resultHTML = `
-    <h3>Issue: ${issue}</h3>
-    <p>${result}</p>
-`;
-
-document.getElementById("resultContent").innerHTML = resultHTML;
-
-showPage("resultPage"); 
-     
-
-};
-     window.onload = function(){
-    let user = localStorage.getItem("currentUser");
-
-    if(user){
-        showPage("mainApp");   // ✅ use your function
-    } else {
-        showPage("introScreen");
-    }
-};
-
-
-
-    document.getElementById("issueInput").addEventListener("input", function(){
-    toggleAgeWeight(this.value);
-});
-    function goBack(){
-    showPage("mainApp");
-}
 </script>
-    </div>
-    <div id="resultPage" style="display:none; background:white;">
-    <div class="card">
-        <h2>Your Remedy</h2>
-
-        <div id="resultContent"></div>
-
-        <br>
-        <button onclick="goBack()">⬅ Back</button>
-    </div>
-</div>
+   
 
 </body>
 
