@@ -648,18 +648,20 @@ if(user){
     let user = localStorage.getItem("currentUser");
 
     if(user){
-        // Already logged in → go directly to app
+        // Show main app
         document.getElementById("introScreen").style.display = "none";
         document.getElementById("authBox").style.display = "none";
         document.getElementById("mainApp").style.display = "block";
     } else {
-        // Not logged in → show intro
+        // Show intro screen
         document.getElementById("introScreen").style.display = "flex";
         document.getElementById("authBox").style.display = "none";
         document.getElementById("mainApp").style.display = "none";
     }
 };
-}
+   
+};
+
     document.getElementById("issueInput").addEventListener("input", function(){
     toggleAgeWeight(this.value);
 });
