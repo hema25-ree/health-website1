@@ -143,21 +143,17 @@
     </div>
 </div>
     <!-- LOGIN BOX -->
-<div class="container">
-  <h1 class="title">🌿Health Remedy Assistant</h1>
-
-  <div id="authBox" class="auth-box">
-    <h2>Welcome 👋</h2>
-
-<input type="text" id="username" placeholder="👤 Username">
-<input type="password" id="password" placeholder="🔒 Password">
-
+<div id="authBox" style="display:none;">
+    <div class="card">
+        <h2 class="auth-title">Welcome 👋</h2>
+        <input type="text" id="username" placeholder="👤 Username">
+        <input type="password" id="password" placeholder="🔒 Password">
+        <br>
         <button onclick="login()">Login</button>
-    <button onclick="signup()">Sign Up</button>
-        
-   </div> 
+        <button onclick="signup()">Sign Up</button>
+        <p id="authMsg"></p>
+    </div>
 </div>
-        
  
 
     <div id="mainApp" style="display:none;">
@@ -668,77 +664,35 @@ if(user){
     localStorage.setItem(user + "_history", JSON.stringify(history));
 }
 }
-<script>
-// Start button: show login/signup box
-function startApp() {
-    document.getElementById("introScreen").style.display = "none";
-    document.getElementById("authBox").style.display = "block";
-}
 
-// Sign up
-function signup() {
-    let user = document.getElementById("username").value.trim();
-    let pass = document.getElementById("password").value.trim();
+   
 
-    if(user === "" || pass === ""){
-        alert("⚠ Fill all fields");
-        return;
-    }
 
-    if(localStorage.getItem(user)){
-        alert("❌ User already exists. Please login.");
-        return;
-    }
-
-    localStorage.setItem(user, pass);
-    alert("✅ Signup successful! Now login.");
-    document.getElementById("username").value = "";
-    document.getElementById("password").value = "";
-}
-
-// Login
-function login() {
-    let user = document.getElementById("username").value.trim();
-    let pass = document.getElementById("password").value.trim();
-
-    let storedPass = localStorage.getItem(user);
-
-    if(storedPass === null){
-        alert("❌ User not found. Please sign up.");
-        return;
-    }
-
-    if(storedPass === pass){
-        localStorage.setItem("currentUser", user);
-
-        // Hide auth box, show main app
-        document.getElementById("authBox").style.display = "none";
-        document.getElementById("mainApp").style.display = "block";
-
-        // Show history button
-        document.querySelector("button[onclick='showHistory()']").style.display = "inline-block";
-
-    } else {
-        alert("❌ Wrong password");
-    }
-}
-
+   
+  
 // On page load
 window.onload = function() {
-    let user = localStorage.getItem("currentUser");
+    const startBtn = document.getElementById("startBtn");
+    startBtn.addEventListener("click", function() {
+        document.getElementById("introScreen").style.display = "none";
+        document.getElementById("authBox").style.display = "block";
+    });
 
+    // If user is already logged in
+    let user = localStorage.getItem("currentUser");
     if(user){
         document.getElementById("introScreen").style.display = "none";
         document.getElementById("authBox").style.display = "none";
         document.getElementById("mainApp").style.display = "block";
-        document.querySelector("button[onclick='showHistory()']").style.display = "inline-block";
+
+        // Show history button if exists
+        const historyBtn = document.querySelector("button[onclick='showHistory()']");
+        if(historyBtn) historyBtn.style.display = "inline-block";
     } else {
-        document.getElementById("introScreen").style.display = "flex";
-        document.getElementById("authBox").style.display = "none";
         document.getElementById("mainApp").style.display = "none";
-        document.querySelector("button[onclick='showHistory()']").style.display = "none";
     }
 };
+
 
 
 </script>
