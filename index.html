@@ -138,8 +138,8 @@
         <img src="https://images.unsplash.com/photo-1584515933487-779824d29309?w=500" width="220">
 
         <br><br>
-
-        <button id="startBtn">Start</button>
+        <button onclick="startApp()">Start</button>
+        
     </div>
 </div>
     <!-- LOGIN BOX -->
@@ -239,6 +239,11 @@
                  alert("❌ Wrong password");
             }
         }
+    function startApp(){
+    document.getElementById("introScreen").style.display = "none"; // hide intro screen
+    document.getElementById("authBox").style.display = "block";    // show login/signup
+    document.getElementById("mainApp").style.display = "none";     // hide main app
+}
 
        
 }
@@ -662,41 +667,36 @@ if(user){
     localStorage.setItem(user + "_history", JSON.stringify(history));
 }
 }
+window.onload = function() {
+    const startBtn = document.getElementById("startBtn");
 
+    startBtn.addEventListener("click", function() {
+        document.getElementById("introScreen").style.display = "none";
+        document.getElementById("authBox").style.display = "block";
+    });
+
+    // If user is already logged in
+    let user = localStorage.getItem("currentUser");
+    if(user){
+        document.getElementById("introScreen").style.display = "none";
+        document.getElementById("authBox").style.display = "none";
+        document.getElementById("mainApp").style.display = "block";
+
+        const historyBtn = document.querySelector("button[onclick='showHistory()']");
+        if(historyBtn) historyBtn.style.display = "inline-block";
+    } else {
+        document.getElementById("mainApp").style.display = "none";
+        document.getElementById("authBox").style.display = "none";
+    }
+};
    
 
 
    
   
 // On page load
-window.onload = function() {
-    const startBtn = document.getElementById("startBtn");
-    const intro = document.getElementById("introScreen");
-    const auth = document.getElementById("authBox");
-    const main = document.getElementById("mainApp");
 
-    // Start button click
-    startBtn.addEventListener("click", function() {
-        intro.style.display = "none";
-        auth.style.display = "block"; // show login/signup
-        main.style.display = "none";  // ensure main app is hidden
-    });
-
-    // If user already logged in
-    let user = localStorage.getItem("currentUser");
-    if(user){
-        intro.style.display = "none";
-        auth.style.display = "none";
-        main.style.display = "block";
-
-        const historyBtn = document.querySelector("button[onclick='showHistory()']");
-        if(historyBtn) historyBtn.style.display = "inline-block";
-    } else {
-        main.style.display = "none";
-        auth.style.display = "none"; // ensure login/signup hidden until Start clicked
-    }
-};
-
+    
 
 </script>
 </script>
