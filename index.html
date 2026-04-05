@@ -188,7 +188,13 @@
 <p id="result"></p>
 
 <p><b>Note:</b> For minor issues only. Consult a doctor if symptoms persist.</p>
-
+<div id="remedyPage" style="display:none;">
+    <div class="card">
+        <h2>🌿 Your Remedy</h2>
+        <p id="remedyResult"></p>
+        <button onclick="backToMain()">⬅ Back</button>
+    </div>
+</div>
 <script>
      function signup(){
             let user = document.getElementById("username").value.trim();
@@ -328,15 +334,21 @@ function getRemedy(){
 
     // Validation
     if(issue === ""){
-        document.getElementById("result").innerHTML = "⚠ Please enter a health issue.";
+       document.getElementById("remedyResult").innerHTML = "⚠ Please enter a health issue.";
+        document.getElementById("mainApp").style.display = "none";
+       document.getElementById("remedyPage").style.display = "block";
         return;
     }
     if(requiresAW && age === ""){
-        document.getElementById("result").innerHTML = "⚠ Please select age group.";
+        document.getElementById("remedyResult").innerHTML = "⚠ Please select age group.";
+        document.getElementById("mainApp").style.display = "none";
+        document.getElementById("remedyPage").style.display = "block";
         return;
     }
     if(requiresAW && !weight){
-        document.getElementById("result").innerHTML = "⚠ Please enter weight.";
+        document.getElementById("remedyResult").innerHTML = "⚠ Please enter weight.";
+        document.getElementById("mainApp").style.display = "none";
+        document.getElementById("remedyPage").style.display = "block";
         return;
     }
 
@@ -694,7 +706,10 @@ window.onload = function() {
 // On page load
 
     
-
+function backToMain(){
+    document.getElementById("remedyPage").style.display = "none";
+    document.getElementById("mainApp").style.display = "block";
+}
 </script>
 </script>
     </div>
