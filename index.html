@@ -662,28 +662,8 @@ if(user){
 }
 }
     
-window.onload = function() {
-    const startBtn = document.getElementById("startBtn");
 
-    startBtn.addEventListener("click", function() {
-        document.getElementById("introScreen").style.display = "none";
-        document.getElementById("authBox").style.display = "block";
-    });
-
-    // If user is already logged in
-    let user = localStorage.getItem("currentUser");
-    if(user){
-        document.getElementById("introScreen").style.display = "none";
-        document.getElementById("authBox").style.display = "none";
-        document.getElementById("mainApp").style.display = "block";
-
-        const historyBtn = document.querySelector("button[onclick='showHistory()']");
-        if(historyBtn) historyBtn.style.display = "inline-block";
-    } else {
-        document.getElementById("mainApp").style.display = "none";
-        document.getElementById("authBox").style.display = "none";
-    }
-};
+      
    
 
 
@@ -693,9 +673,9 @@ window.onload = function() {
 
     
 
-}
+
 </script>
-</script>
+
     </div>
 
 </body>
