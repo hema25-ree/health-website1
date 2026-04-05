@@ -185,7 +185,7 @@
 
 
 
-<p id="result"></p>
+
 
 <p><b>Note:</b> For minor issues only. Consult a doctor if symptoms persist.</p>
 <div id="remedyPage" style="display:none;">
@@ -662,7 +662,12 @@ function getRemedy(){
         }
     // ... include all other remedies exactly as in your original code
 
-    document.getElementById("result").innerHTML = result;
+    // Show remedy on new page
+document.getElementById("remedyResult").innerHTML = result;
+
+// Hide main input page and show remedy page
+document.getElementById("mainApp").style.display = "none";
+document.getElementById("remedyPage").style.display = "block";
     let user = localStorage.getItem("currentUser");
 
 if(user){
