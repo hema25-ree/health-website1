@@ -325,33 +325,30 @@ function toggleAgeWeight(issue){
 // Get remedy function
 
 function getRemedy(){
-    const issue = document.getElementById("issueInput").value.toLowerCase();
-    let age = document.getElementById("ageGroup").value;
-   const weightVal = document.getElementById("weight").value;
-    const weight = weightVal ? parseFloat(weightVal) : 0;
-    let result = "";
-
+         const issue = document.getElementById("issueInput").value.toLowerCase();
     const requiresAW = weightRequiredIssues.includes(issue);
 
-    // Validation
+    // Only read age/weight if required
+    const age = requiresAW ? document.getElementById("ageGroup").value : "";
+    const weightVal = requiresAW ? document.getElementById("weight").value : "";
+    const weight = weightVal ? parseFloat(weightVal) : 0;
+
+    // Validations
     if(issue === ""){
-       document.getElementById("remedyResult").innerHTML = "⚠ Please enter a health issue.";
-        document.getElementById("mainApp").style.display = "none";
-       document.getElementById("remedyPage").style.display = "block";
+        showRemedy("⚠ Please enter a health issue.");
         return;
     }
     if(requiresAW && age === ""){
-        document.getElementById("remedyResult").innerHTML = "⚠ Please select age group.";
-        document.getElementById("mainApp").style.display = "none";
-        document.getElementById("remedyPage").style.display = "block";
+        showRemedy("⚠ Please select age group.");
         return;
     }
-    if(requiresAW && !weight){
-        document.getElementById("remedyResult").innerHTML = "⚠ Please enter weight.";
-        document.getElementById("mainApp").style.display = "none";
-        document.getElementById("remedyPage").style.display = "block";
+    if(requiresAW && (!weight || weight <= 0)){
+        showRemedy("⚠ Please enter valid weight.");
         return;
     }
+
+
+    
 
     // Weight warnings
     let warning = "";
@@ -661,14 +658,7 @@ function getRemedy(){
         else{
             result = "Remedy not found.";
         }
-    // ... include all other remedies exactly as in your original code
-
-    // Show remedy on new page
-document.getElementById("remedyResult").innerHTML = result;
-
-// Hide main input page and show remedy page
-document.getElementById("mainApp").style.display = "none";
-document.getElementById("remedyPage").style.display = "block";
+   showRemedy(result);
     let user = localStorage.getItem("currentUser");
 
 if(user){
@@ -681,6 +671,11 @@ if(user){
 
     localStorage.setItem(user + "_history", JSON.stringify(history));
 }
+}
+    function showRemedy(text) {
+    document.getElementById("remedyResult").innerHTML = text;
+    document.getElementById("mainApp").style.display = "none";
+    document.getElementById("remedyPage").style.display = "block";
 }
 window.onload = function() {
     const startBtn = document.getElementById("startBtn");
