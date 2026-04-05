@@ -186,15 +186,9 @@
 
 
 
-
+ <p id="result"></p> 
 <p><b>Note:</b> For minor issues only. Consult a doctor if symptoms persist.</p>
-<div id="remedyPage" style="display:none;">
-    <div class="card">
-        <h2>🌿 Your Remedy</h2>
-        <p id="remedyResult"></p>
-        <button onclick="backToMain()">⬅ Back</button>
-    </div>
-</div>
+
 <script>
      function signup(){
             let user = document.getElementById("username").value.trim();
@@ -325,26 +319,23 @@ function toggleAgeWeight(issue){
 // Get remedy function
 
 function getRemedy(){
-         let result = "";
-         const issue = document.getElementById("issueInput").value.toLowerCase();
-    const requiresAW = weightRequiredIssues.includes(issue);
-
-    // Only read age/weight if required
-    const age = requiresAW ? document.getElementById("ageGroup").value : "";
-    const weightVal = requiresAW ? document.getElementById("weight").value : "";
-    const weight = weightVal ? parseFloat(weightVal) : 0;
+      const issue = document.getElementById("issueInput").value.toLowerCase();
+    let age = document.getElementById("ageGroup").value; 
+    let weight = parseFloat(document.getElementById("weight").value);
+    let result = "";
+    const requiresAW = weightRequiredIssues.includes(issue);   
 
     // Validations
     if(issue === ""){
-        showRemedy("⚠ Please enter a health issue.");
+        document.getElementById("result").innerHTML = "⚠ Please enter a health issue.";
         return;
     }
     if(requiresAW && age === ""){
-        showRemedy("⚠ Please select age group.");
+        document.getElementById("result").innerHTML = "⚠ Please select age group.";
         return;
     }
     if(requiresAW && (!weight || weight <= 0)){
-        showRemedy("⚠ Please enter valid weight.");
+        document.getElementById("result").innerHTML = "⚠ Please enter weight.";
         return;
     }
 
@@ -659,7 +650,7 @@ function getRemedy(){
         else{
             result = "Remedy not found.";
         }
-   showRemedy(result);
+   
     let user = localStorage.getItem("currentUser");
 
 if(user){
@@ -673,11 +664,7 @@ if(user){
     localStorage.setItem(user + "_history", JSON.stringify(history));
 }
 }
-    function showRemedy(text) {
-    document.getElementById("remedyResult").innerHTML = text;
-    document.getElementById("mainApp").style.display = "none";
-    document.getElementById("remedyPage").style.display = "block";
-}
+    
 window.onload = function() {
     const startBtn = document.getElementById("startBtn");
 
@@ -708,9 +695,7 @@ window.onload = function() {
 // On page load
 
     
-function backToMain(){
-    document.getElementById("remedyPage").style.display = "none";
-    document.getElementById("mainApp").style.display = "block";
+
 }
 </script>
 
