@@ -366,17 +366,25 @@ function getRemedy(){
     else if(issue === "fever"){
         // Preserve your existing fever remedies exactly
         if(age === "infant"){
-            result = warning + "✔ Give frequent breastmilk/formula (water only if over 6 months), keep the baby lightly clothed, and maintain a cool room to prevent dehydration and overheating.<br>\
-✔ Use a lukewarm sponge bath for comfort; keep the baby rested and monitor temperature regularly.<br>\
-⚠ Consult a doctor first for medication; seek immediate care if under 3 months with fever, fever lasts over 3 days, or there is breathing difficulty or unusual sleepiness.<br>";
+            result = warning + "👶 Infant Care:<br>" +
+                               "💧 Continue breastfeeding frequently.<br>" +
+                               "🧊 Sponge with lukewarm water to reduce fever.<br>" +
+                               "💤 Ensure complete rest and comfort.<br>" +
+                               "🌿 Avoid medicines unless prescribed by doctor.<br>";
         } else if(age==="child"){
-            result = warning + "✔ Give plenty of fluids (water, soups, popsicles) and keep the child in light clothing in a cool room; encourage rest.<br>\
-✔ Use a lukewarm sponge bath for comfort; give acetaminophen or ibuprofen based on weight (never aspirin).<br>\
-⚠ See a doctor if fever lasts over 3 days, signs of dehydration appear, or there is breathing difficulty, rash, or unusual drowsiness.<br>";
+        result = warning + "💧 Give warm water in small intervals.<br>" +
+                           "🍵 Tulsi + ginger water in mild quantity (if suitable).<br>" +
+                           "🧊 Lukewarm sponge bath for fever reduction.<br>" +
+                           "🥣 Light foods like rice porridge, soups, khichdi.<br>" +
+                           "💤 Encourage rest and avoid heavy activity.<br>";
         } else {
-            result = warning + "✔ Drink plenty of fluids (water, soups, herbal tea), rest well, and wear light clothing in a cool room to help reduce body temperature.<br>\
-✔ Use acetaminophen or ibuprofen for discomfort and apply lukewarm compresses or take a lukewarm bath for relief.<br>\
-⚠ Seek medical care if fever exceeds 103°F (39.4°C), lasts more than 3 days, or includes confusion, stiff neck, or breathing difficulty.<br>";
+            result = warning + "🧑 Adult Care:<br>" +
+                               "💧 Drink warm water frequently.<br>" +
+                               "🍵 Tulsi + ginger herbal water 2–3 times daily.<br>" +
+                               "🧘 Take complete rest to support recovery.<br>" +
+                               "🌿 Turmeric milk at night for healing.<br>" +
+                               "🥣 Eat light food like khichdi and soups.<br>" +
+                               "🧊 Lukewarm sponge bath if fever is high.<br>";
         }
     }
     
