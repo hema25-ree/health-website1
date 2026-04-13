@@ -350,18 +350,29 @@ function getRemedy(){
     // === Existing remedies preserved ===
     if(issue === "cough"){
         if(age === "infant"){
-            result = warning + "✔ Use saline drops with suction, a cool-mist humidifier, steam sessions, and frequent breastmilk/formula for hydration.<br>\
-✔ Ensure rest and comfort; slightly elevate head safely to ease congestion.<br>\
-⚠ No honey under 1 year and no OTC cough medicines under 2; see a doctor if breathing trouble, high fever, dehydration, or cough lasts over 3 weeks.<br>";
+            result = warning + "👶 Infant Care (Cough):<br>" +
+          "💧 Continue breastfeeding frequently for immunity.<br>" +
+          "🧊 Keep baby warm and avoid cold exposure.<br>" +
+          "💨 Maintain mild humid air in the room (no direct steam).<br>" +
+          "🧼 Keep nose clean if blocked (doctor-advised saline drops).<br>" +
+          "🚫 Avoid any home remedies or medicines without doctor advice.<br>" +
+          "🚨 Consult a doctor if cough is persistent or severe.<br>";
         } else if(age === "child"){
-            result = warning + "✔ Give 1 teaspoon honey (age 1+ only), plenty of fluids, and use a cool-mist humidifier or steam to ease cough and congestion.<br>\
-✔ Use saline nose drops for blocked nose, ensure rest, and elevate the head slightly for comfort.<br>\
-⚠ No honey under 1 year and avoid OTC cough medicines (especially under 4–6 years); see a doctor for breathing trouble, wheezing, high fever, or cough over 2 weeks.<br>";
+            result = warning + "🧒 Child Care (Cough):<br>" +
+          "💧 Give warm water in small sips.<br>" +
+          "🍯 Honey with warm water (only if above 1 year).<br>" +
+          "🍵 Mild tulsi + ginger water for relief.<br>" +
+          "💨 Steam inhalation under supervision.<br>" +
+          "🥣 Give warm foods like soups and porridge.<br>" +
+          "🚫 Avoid cold foods and drinks.<br>"; 
         } else {
-            result = warning + "✔ Take 1–2 tsp honey in warm water/tea, drink ginger or turmeric milk, and stay well hydrated to soothe the throat and reduce inflammation.<br>\
-✔ Use steam inhalation or a humidifier, gargle warm salt water, and use lozenges to ease irritation and loosen mucus.<br>\
-⚠ Avoid smoke/irritants; see a doctor if cough lasts more than 3 weeks, causes breathing trouble, or comes with high fever.<br>";
-        }
+              result = warning + "🧑 Adult Care (Cough):<br>" +
+          "💧 Drink warm water frequently.<br>" +
+          "🍵 Tulsi + ginger + black pepper herbal tea.<br>" +
+          "💨 Steam inhalation 1–2 times daily.<br>" +
+          "🌿 Turmeric milk at night for relief.<br>" +
+          "🧘 Take proper rest and avoid cold exposure.<br>" +
+          "🚫 Avoid smoking and cold foods.<br>";        }
     }
     else if(issue === "fever"){
         // Preserve your existing fever remedies exactly
@@ -391,36 +402,57 @@ function getRemedy(){
     
     else if(issue === "cold"){
             if(age === "infant"){
-            result = warning + "✔ Use saline nose drops with a suction bulb, a cool-mist humidifier or steam, and keep the baby well-hydrated with breastmilk or formula.<br>\
-            ✔ Keep the baby comfortable and rested; slight head elevation and gentle warm massage may help ease congestion.<br>\
-            ⚠ No honey under 1 year and avoid OTC cold medicines; see a doctor for breathing trouble, fever in infants under 3 months, dehydration, or symptoms lasting over 10–14 days.<br>";
+            result = warning + "👶 Infant Care (Cold):<br>" +
+          "💧 Continue breastfeeding frequently for immunity.<br>" +
+          "🧊 Keep baby warm and avoid cold air exposure.<br>" +
+          "💨 Maintain mild humid air in the room.<br>" +
+          "🧼 Use saline drops only if prescribed by doctor.<br>" +
+          "🌿 Avoid herbal medicines unless advised by pediatrician.<br>";
             }
             else if(age==="child"){
-            result = warning + "✔ Use saline nose drops with suction, a cool-mist humidifier, and give plenty of fluids; ensure the child gets enough rest.<br>\
-            ✔ For children over 1 year, give ½–1 teaspoon honey for cough; use acetaminophen or ibuprofen for fever/pain (correct dose by weight).<br>\
-            ⚠ No honey under 1 year, no aspirin, and avoid OTC cold medicines under 6; see a doctor for breathing trouble, dehydration, high fever, or symptoms lasting over 10–14 days.<br>";
+            result = warning +"🧒 Child Care (Cold):<br>" +
+          "💧 Give warm water in small sips.<br>" +
+          "🍵 Mild tulsi-ginger decoction for relief.<br>" +
+          "💨 Steam inhalation under supervision.<br>" +
+          "🥣 Light warm foods like soups and khichdi.<br>" +
+          "🧘 Ensure rest and avoid cold foods and drinks.<br>";
             }
             else{
-            result = warning + "✔ Stay hydrated (water, warm tea, soups), rest well, and use a humidifier or steam to relieve congestion.<br>\
-            ✔ Gargle warm salt water for sore throat, use saline spray, and take honey to soothe cough; acetaminophen or ibuprofen can reduce fever and body aches.<br>\
-            ⚠ See a doctor if symptoms last more than 10 days or if there is high fever, chest pain, or breathing difficulty.<br>";
+            result = warning + "🧑 Adult Care (Cold):<br>" +
+          "💧 Drink warm water frequently to reduce mucus.<br>" +
+          "🍵 Tulsi, ginger, and black pepper herbal tea.<br>" +
+          "💨 Steam inhalation 1–2 times daily.<br>" +
+          "🌿 Turmeric milk at night for immunity support.<br>" +
+          "🧘 Take proper rest and avoid cold exposure.<br>" +
+          "🥣 Eat warm, light meals like soups and khichdi.<br>";
             }
     }
     else if(issue === "sore throat"){
             if(age === "infant"){
-            result = "✔ Give frequent breastmilk or formula to keep the baby hydrated.<br>\
-            ✔ Use a cool-mist humidifier and keep air moist to soothe the throat.<br>\
-            ⚠ Do not give honey under 1 year; see a doctor if feeding difficulty, fever, or breathing problems occur.<br>";
+            result =  "👶 Infant Care (Sore Throat):<br>" +
+          "💧 Continue breastfeeding frequently to keep throat moist and support immunity.<br>" +
+          "🧊 Keep baby warm and avoid cold air exposure.<br>" +
+          "💨 Maintain mild humid air in the room (no direct steam).<br>" +
+          "🧼 Keep nasal passages clean using doctor-recommended saline drops if needed.<br>" +
+          "🌿 Avoid home remedies or herbal medicines unless prescribed by a pediatrician.<br>";
             }
         else if(age === "child"){
-            result = "✔ Give warm fluids and ensure plenty of rest.<br>\
-            ✔ For children over 1 year, ½–1 teaspoon honey can soothe throat irritation.<br>\
-            ⚠ Avoid very hot foods and OTC lozenges for young children; see a doctor if pain is severe or lasts over 3 days.<br>";
-           }
+            result ="🧒 Child Care (Sore Throat):<br>" +
+          "💧 Give warm water in small sips frequently.<br>" +
+          "🍯 Warm honey water (only if child is above 1 year).<br>" +
+          "🍵 Mild tulsi + ginger water for relief.<br>" +
+          "💨 Steam inhalation under adult supervision.<br>" +
+          "🥣 Soft warm foods like soups, porridge, and khichdi.<br>" +
+          "🧘 Ensure rest and avoid cold drinks and ice creams.<br>";
+        }
         else{
-        result = "✔ Drink warm fluids, herbal tea, or honey-lemon water to soothe the throat.<br>\
-        ✔ Gargle warm salt water and use steam inhalation to reduce irritation.<br>\
-        ⚠ See a doctor if sore throat lasts more than 1 week, causes difficulty swallowing, or comes with high fever.<br>";
+        result ="🧑 Adult Care (Sore Throat):<br>" +
+          "💧 Drink warm water frequently to soothe throat.<br>" +
+          "🧂 Warm salt water gargle 2–3 times daily.<br>" +
+          "🍵 Tulsi + ginger + black pepper herbal tea.<br>" +
+          "🌿 Turmeric milk at night for healing.<br>" +
+          "💨 Steam inhalation once or twice daily.<br>" +
+          "🧘 Take rest and avoid cold foods and smoking.<br>";
            }
         }
         else if(issue === "headache"){
@@ -428,229 +460,406 @@ function getRemedy(){
         result = "⚠ Headaches are hard to identify in infants; consult a doctor if the baby is unusually irritable or has fever.<br>";
           }
         else if(age==="child"){
-        result = "✔ Ensure rest and proper sleep.<br>\
-        ✔ Give plenty of fluids and reduce screen time.<br>\
-        ⚠ See a doctor if headache is severe or frequent.<br>";
-          }
+        result = warning + "🧒 Child Care (Headache):<br>" +
+          "💧 Give warm water in small sips to stay hydrated.<br>" +
+          "🧘 Ensure proper rest in a quiet, dark room.<br>" +
+          "🧊 Apply a cool compress on the forehead if needed.<br>" +
+          "🍵 Mild herbal water (like tulsi) only if suitable.<br>" +
+          "📵 Avoid screen time (mobile/TV) until recovery.<br>";
         else{
-        result = "✔ Rest in a quiet, dark room and stay hydrated.<br>\
-        ✔ Apply a cold compress to the forehead.<br>\
-        ⚠ Seek medical help if headaches are severe, frequent, or with vision problems.<br>";
+        result = warning + "🧑 Adult Care (Headache):<br>" +
+          "💧 Drink plenty of warm water to stay hydrated.<br>" +
+          "🧘 Rest in a quiet, dark environment.<br>" +
+          "🧊 Apply cold or warm compress on forehead/neck.<br>" +
+          "🍵 Herbal tea (tulsi or ginger) for relaxation.<br>" +
+          "🌿 Gentle head massage with oil (if suitable).<br>" +
+          "📵 Avoid stress, screen time, and loud environments.<br>";
            }
         }
         else if(issue === "stomach pain"){
         if(age === "infant"){
-        result = warning + "✔ Burp the baby and keep upright after feeding.<br>\
-        ✔ Gentle tummy massage may help gas discomfort.<br>\
-        ⚠ See a doctor if vomiting, fever, or continuous crying occurs.<br>";
+        result = warning + "👶 Infant Care (Stomach Pain):<br>" +
+          "💧 Continue breastfeeding frequently for comfort and hydration.<br>" +
+          "🧊 Keep baby in a comfortable warm position.<br>" +
+          "🌿 Gentle tummy massage with warm hands (very soft, clockwise).<br>" +
+          "💤 Ensure proper rest and avoid handling too much.<br>" +
+          "🚫 Avoid any home medicines unless prescribed by doctor.<br>";
            }
         else if(age==="child"){
-        result = warning + "✔ Give warm fluids and light foods like rice or banana.<br>\
-        ✔ Encourage rest and avoid junk food.<br>\
-        ⚠ Consult a doctor if pain is severe or lasts more than a day.<br>";
+        result = warning +"🧒 Child Care (Stomach Pain):<br>" +
+          "💧 Give warm water in small sips.<br>" +
+          "🥣 Light foods like rice porridge, banana, or soups.<br>" +
+          "🌿 Gentle tummy massage with warm hands in circular motion.<br>" +
+          "🧘 Ensure rest and avoid heavy or oily foods.<br>" +
+          "🚫 Avoid spicy foods, junk food, and cold drinks.<br>";
            }
         else{
-        result = warning + "✔ Eat light foods and drink warm water.<br>\
-        ✔ Avoid spicy or oily food until relief.<br>\
-        ⚠ Seek medical help if pain is severe or persistent.<br>";
+        result = warning + "🧑 Adult Care (Stomach Pain):<br>" +
+          "💧 Drink warm water or jeera (cumin) water.<br>" +
+          "🍵 Ginger tea to improve digestion.<br>" +
+          "🌿 Light abdominal massage with warm oil if needed.<br>" +
+          "🥣 Eat simple foods like khichdi, rice, and curd (if suitable).<br>" +
+          "🧘 Take rest and avoid stress and heavy meals.<br>" +
+          "🚫 Avoid oily, spicy, and junk foods.<br>";
            }
         }
         else if(issue === "weakness"){
         if(age === "infant"){
-        result = warning + "✔ Ensure frequent feeding (breastmilk/formula).<br>\
-        ⚠ See a doctor if the baby is unusually sleepy or feeding poorly.<br>";
+        result = warning +"👶 Infant Care (Weakness):<br>" +
+          "💧 Continue breastfeeding frequently for strength and nutrition.<br>" +
+          "🧊 Keep baby warm and well-rested.<br>" +
+          "💤 Ensure adequate sleep and comfort.<br>" +
+          "🌿 Avoid any medicines or supplements unless prescribed by doctor.<br>" +
+          "🧘 Gentle handling and stress-free environment.<br>";
            }
         else if(age==="child"){
-        result = warning + "✔ Give fluids, fruits, and nutritious foods.<br>\
-        ✔ Ensure proper sleep and rest.<br>\
-        ⚠ Consult a doctor if weakness continues.<br>";
+        result = warning +"🧒 Child Care (Weakness):<br>" +
+          "💧 Give warm water and stay hydrated.<br>" +
+          "🥣 Nutritious light foods like milk, fruits, soups, and porridge.<br>" +
+          "🍯 Honey (if above 1 year) for natural energy boost.<br>" +
+          "🧘 Ensure proper sleep and rest.<br>" +
+          "🚫 Avoid junk food and overexertion.<br>";
            }
         else{
-        result = warning + "✔ Drink water, eat balanced meals, and rest well.<br>\
-        ✔ Include fruits and iron-rich foods.<br>\
-        ⚠ Seek medical advice if weakness is persistent.<br>";
+        result = warning + "🧑 Adult Care (Weakness):<br>" +
+          "💧 Drink plenty of warm water to stay hydrated.<br>" +
+          "🍵 Herbal drinks like ginger or tulsi tea for energy.<br>" +
+          "🥣 Eat balanced diet including fruits, nuts, and proteins.<br>" +
+          "🌿 Turmeric milk at night for recovery and strength.<br>" +
+          "🧘 Take proper rest and avoid stress or overwork.<br>";
            }
         }
         else if(issue === "vomiting"){
         if(age === "infant"){
-        result = "✔ Give small frequent feeds to prevent dehydration.<br>\
-        ✔ Keep the baby upright after feeding.<br>\
-        ⚠ See a doctor if vomiting is frequent or baby seems dehydrated.<br>";
+        result = warning + "👶 Infant Care (Vomiting):<br>" +
+          "💧 Continue breastfeeding in small, frequent feeds.<br>" +
+          "🧊 Keep baby upright after feeding.<br>" +
+          "💤 Ensure proper rest and comfort.<br>" +
+          "🌿 Avoid any home medicines unless prescribed by doctor.<br>" +
+          "🚨 Seek medical help if vomiting is frequent or severe.<br>";
            }
         else if(age==="child"){
-        result ="✔ Give small sips of water or ORS.<br>\
-        ✔ Avoid solid food until vomiting stops.<br>\
-        ⚠ Seek medical care if vomiting continues or dehydration signs appear.<br>";
+        result = warning + "🧒 Child Care (Vomiting):<br>" +
+          "💧 Give ORS or warm water in small sips frequently.<br>" +
+          "🥣 Light foods like rice porridge, banana, or toast.<br>" +
+          "🧘 Ensure rest and avoid solid heavy foods temporarily.<br>" +
+          "🚫 Avoid oily, spicy, and junk foods.<br>" +
+          "🚨 Consult doctor if vomiting continues or dehydration occurs.<br>";
            }
         else{
-        result ="✔ Drink ORS or clear fluids to stay hydrated.<br>\
-        ✔ Eat light foods after vomiting stops.<br>\
-        ⚠ Consult a doctor if vomiting persists or includes blood.<br>";
+        result = warning + "🧑 Adult Care (Vomiting):<br>" +
+          "💧 Drink ORS or warm water in small sips to prevent dehydration.<br>" +
+          "🍵 Ginger tea may help reduce nausea.<br>" +
+          "🥣 Eat light foods like rice, banana, and soups after recovery.<br>" +
+          "🧘 Take rest and avoid solid foods until nausea reduces.<br>" +
+          "🚫 Avoid oily, spicy, and heavy foods.<br>";
            }
         }
         else if(issue === "burn"){
-        result ="✔ Cool the burn under running water for 10 minutes.<br>\
-        ✔ Apply aloe vera or burn ointment.<br>\
-        ⚠ Seek medical care for deep burns or blisters.<br>";
+        result = warning + "🔥 General Care (Burn):<br>" +
+          "💧 Immediately cool the burn with running cool (not ice) water for 10–15 minutes.<br>" +
+          "🧼 Do not apply oil, butter, toothpaste, or any home remedies.<br>" +
+          "🩹 Cover loosely with a clean, sterile, non-stick cloth.<br>" +
+          "🧘 Keep the affected area calm and avoid touching or breaking blisters.<br>" +
+          "🚫 Avoid ice directly on skin as it can damage tissue.<br>" +
+          "🚨 Seek medical attention for severe, large, or deep burns.<br>";
         }
         else if(issue === "diarrhea"){
         if(age === "infant"){
-        result ="✔ Continue breastfeeding or formula feeding frequently.<br>\
-        ✔ Use ORS only if advised by a doctor.<br>\
-        ⚠ Seek medical care if dehydration signs or diarrhea lasts more than 24 hours.<br>";
+        result = warning + "👶 Infant Care (Diarrhea):<br>" +
+          "💧 Continue breastfeeding frequently to prevent dehydration.<br>" +
+          "🧴 Give ORS in small amounts if advised by doctor.<br>" +
+          "🧊 Keep baby clean and comfortable.<br>" +
+          "🚫 Avoid any home medicines unless prescribed by doctor.<br>" +
+          "🚨 Seek medical help if stools are frequent or baby is weak.<br>";
            }
         else if(age==="child"){
-        result ="✔ Give ORS, water, and light foods like rice or banana.<br>\
-        ✔ Maintain hygiene and handwashing.<br>\
-        ⚠ See a doctor if diarrhea lasts more than 2 days or dehydration appears.<br>";
+        result = warning + "🧒 Child Care (Diarrhea):<br>" +
+          "💧 Give ORS or coconut water frequently in small sips.<br>" +
+          "🥣 Light foods like rice porridge, banana, and curd (if suitable).<br>" +
+          "🚫 Avoid oily, spicy, and junk foods.<br>" +
+          "🧘 Ensure rest and maintain hydration.<br>" +
+          "🚨 Consult doctor if diarrhea persists or dehydration occurs.<br>";
            }
         else{
-        result ="✔ Drink ORS and plenty of fluids.<br>\
-        ✔ Eat light foods like rice, curd, and banana.<br>\
-        ⚠ Consult a doctor if diarrhea persists or includes blood.<br>";
+        result = warning + "🧑 Adult Care (Diarrhea):<br>" +
+          "💧 Drink ORS or plenty of fluids to prevent dehydration.<br>" +
+          "🥣 Eat light foods like rice, banana, toast, and curd (if suitable).<br>" +
+          "🍵 Avoid caffeine, alcohol, and spicy foods.<br>" +
+          "🧘 Take rest and maintain electrolyte balance.<br>" +
+          "🚨 Seek medical help if symptoms are severe or persistent.<br>";
            }
         }
         else if(issue === "toothache"){
         if(age === "infant"){
-        result ="✔ Teething may cause discomfort; use a clean teething ring.<br>\
-        ⚠ Consult a pediatrician if swelling or fever occurs.<br>";
+        result = warning + "👶 Infant Care (Toothache/Teething):<br>" +
+          "🧊 Use a clean, cool teething ring to soothe gums.<br>" +
+          "💧 Gently massage gums with clean finger.<br>" +
+          "🧼 Keep baby's mouth clean after feeding.<br>" +
+          "💤 Ensure comfort and proper rest.<br>" +
+          "🚫 Avoid gels or medicines unless prescribed by doctor.<br>";
            }
         else if(age==="child"){
-        result ="✔ Rinse mouth with warm salt water.<br>\
-        ✔ Avoid very cold or sugary foods.<br>\
-        ⚠ Visit a dentist if pain persists.<br>";
+        result =  warning + "🧒 Child Care (Toothache):<br>" +
+          "💧 Rinse mouth with warm salt water.<br>" +
+          "🧊 Apply cold compress on cheek to reduce pain.<br>" +
+          "🍵 Avoid very hot, cold, or sugary foods.<br>" +
+          "🧼 Maintain proper oral hygiene (brushing gently).<br>" +
+          "🚨 Visit dentist if pain persists.<br>";
            }
         else{
-        result ="✔ Gargle warm salt water and maintain oral hygiene.<br>\
-        ✔ Use clove oil for temporary relief.<br>\
-        ⚠ See a dentist if swelling or severe pain occurs.<br>";
+        result = warning + "🧑 Adult Care (Toothache):<br>" +
+          "💧 Rinse mouth with warm salt water 2–3 times daily.<br>" +
+          "🧊 Apply cold compress to reduce swelling and pain.<br>" +
+          "🌿 Clove or clove oil may help relieve pain.<br>" +
+          "🍵 Avoid very hot, cold, and sugary foods.<br>" +
+          "🧼 Maintain oral hygiene and brush gently.<br>" +
+          "🚨 Consult a dentist if pain is severe or continuous.<br>";
            }
         }
         else if(issue === "ear pain"){
         if(age === "infant"){
-        result ="⚠ Ear pain in infants requires medical evaluation.<br>";
+        result = warning + "👶 Infant Care (Ear Pain):<br>" +
+          "💧 Continue breastfeeding to comfort the baby.<br>" +
+          "🧊 Keep baby in an upright position to reduce pressure.<br>" +
+          "🧼 Keep ear dry and clean (do not insert anything).<br>" +
+          "💤 Ensure proper rest and comfort.<br>" +
+          "🚫 Avoid any ear drops or home remedies unless prescribed by doctor.<br>" +
+          "🚨 Consult a doctor immediately.<br>";
            }
         else if(age==="child"){
-        result ="✔ Apply a warm compress near the ear.<br>\
-        ✔ Keep the child upright to reduce pressure.<br>\
-        ⚠ Consult a doctor if fever or severe pain occurs.<br>";
+        result = warning + "🧒 Child Care (Ear Pain):<br>" +
+          "🧊 Apply a warm compress on the ear for relief.<br>" +
+          "💧 Keep child hydrated and well-rested.<br>" +
+          "🧼 Do not insert objects into the ear.<br>" +
+          "🚫 Avoid water entering the ear.<br>" +
+          "🚨 Visit a doctor if pain persists or fever occurs.<br>";
            }
         else{
-        result ="✔ Apply a warm compress to reduce discomfort.<br>\
-        ✔ Avoid inserting objects into the ear.<br>\
-        ⚠ Seek medical help if pain persists or hearing reduces.<br>";
+        result = warning + "🧑 Adult Care (Ear Pain):<br>" +
+          "🧊 Use a warm compress to reduce pain.<br>" +
+          "💧 Stay hydrated and take rest.<br>" +
+          "🧼 Keep ear dry and avoid inserting anything.<br>" +
+          "🌿 Steam inhalation may help if due to cold.<br>" +
+          "🚫 Avoid self-medication or ear drops without advice.<br>" +
+          "🚨 Seek medical help if pain is severe or continuous.<br>";
            }
         }
         else if(issue === "nosebleed"){
-        result ="✔ Sit upright and lean slightly forward.<br>\
-        ✔ Pinch the soft part of the nose for 10 minutes.<br>\
-        ⚠ Seek medical care if bleeding lasts more than 20 minutes.<br>";
+        result = warning + "👃 General Care (Nosebleed):<br>" +
+          "🧘 Sit upright and lean slightly forward (do not tilt head back).<br>" +
+          "🤏 Pinch the soft part of the nose for 10–15 minutes.<br>" +
+          "🧊 Apply cold compress or ice pack on the nose/forehead.<br>" +
+          "💨 Breathe through the mouth and stay calm.<br>" +
+          "🚫 Avoid blowing or picking the nose after bleeding stops.<br>" +
+          "🚨 Seek medical help if bleeding lasts more than 20 minutes or is frequent.<br>";
         }
         else if(issue === "constipation"){
         if(age === "infant"){
-        result ="✔ Gentle tummy massage may help.<br>\
-        ✔ Consult a doctor before giving water or juice.<br>";
+        result =warning + "👶 Infant Care (Constipation):<br>" +
+          "💧 Continue breastfeeding frequently for natural digestion.<br>" +
+          "🧊 Ensure baby is well hydrated and comfortable.<br>" +
+          "🌿 Gentle tummy massage in clockwise direction.<br>" +
+          "🦵 Move baby's legs in cycling motion to help bowel movement.<br>" +
+          "🚫 Avoid any home remedies or medicines without doctor advice.<br>" +
+          "🚨 Consult a doctor if constipation is severe or persistent.<br>";
            }
         else if(age==="child"){
-        result ="✔ Increase fruits, vegetables, and water intake.<br>\
-        ✔ Encourage physical activity.<br>\
-        ⚠ See a doctor if constipation persists.<br>";
+        result = warning + "🧒 Child Care (Constipation):<br>" +
+          "💧 Give warm water regularly.<br>" +
+          "🥗 Include fruits like banana, papaya, and vegetables.<br>" +
+          "🥣 Give soft foods like porridge and soups.<br>" +
+          "🧘 Encourage physical activity.<br>" +
+          "🚫 Avoid junk food and excess sweets.<br>";
            }
         else{
-        result ="✔ Eat fiber-rich foods and drink plenty of water.<br>\
-        ✔ Regular exercise helps bowel movement.<br>\
-        ⚠ Seek medical advice if persistent.<br>";
+        result = warning + "🧑 Adult Care (Constipation):<br>" +
+          "💧 Drink warm water, especially in the morning.<br>" +
+          "🥗 High-fiber diet (fruits, vegetables, whole grains).<br>" +
+          "🍌 Soaked raisins or banana for natural relief.<br>" +
+          "🍵 Herbal drinks or warm milk at night.<br>" +
+          "🧘 Exercise daily and maintain regular routine.<br>" +
+          "🚫 Avoid oily, processed, and fast foods.<br>";
            }
         }
         else if(issue === "allergy" || issue === "rash"){
-        result ="✔ Wash the area with clean water and keep skin dry.<br>\
-        ✔ Apply aloe vera or calamine lotion to soothe irritation.<br>\
-        ⚠ Seek medical help if swelling, breathing trouble, or spreading rash occurs.<br>";
+        result =warning + "🌿 General Care (Allergy/Rash):<br>" +
+          "🧼 Keep the affected area clean and dry.<br>" +
+          "🧊 Apply a cool compress to reduce itching and redness.<br>" +
+          "👕 Wear loose, soft cotton clothes to avoid irritation.<br>" +
+          "🚫 Avoid scratching to prevent infection.<br>" +
+          "🌿 Use mild, fragrance-free products on skin.<br>" +
+          "💧 Stay hydrated and avoid known allergens.<br>" +
+          "🚨 Seek medical help if rash spreads, worsens, or causes swelling.<br>";
         }
         else if(issue === "insect bite"){
-        result ="✔ Wash the area and apply a cold compress to reduce swelling.<br>\
-        ✔ Apply aloe vera or anti-itch cream for relief.<br>\
-        ⚠ Seek medical help if severe swelling or breathing difficulty occurs.<br>";
+        result = warning + "🐜 General Care (Insect Bite):<br>" +
+          "🧼 Clean the affected area with mild soap and water.<br>" +
+          "🧊 Apply a cold compress to reduce swelling and itching.<br>" +
+          "🌿 Apply aloe vera or neem paste for soothing relief.<br>" +
+          "🚫 Avoid scratching to prevent infection.<br>" +
+          "👕 Keep area clean and covered if needed.<br>" +
+          "💊 Use mild anti-itch remedy if required.<br>" +
+          "🚨 Seek medical help if severe swelling, pain, or allergy occurs.<br>";
         }       
         else if(issue === "sunburn"){
-        result ="✔ Cool the skin with a damp cloth or cool shower.<br>\
-        ✔ Apply aloe vera gel to soothe the skin.<br>\
-        ⚠ Avoid sun exposure and seek care if blisters or severe pain occur.<br>";
+        result = warning + "☀️ General Care (Sunburn):<br>" +
+          "🧊 Apply cool compress or take a cool bath to soothe skin.<br>" +
+          "🌿 Apply aloe vera gel or sandalwood paste for cooling effect.<br>" +
+          "💧 Drink plenty of water to stay hydrated.<br>" +
+          "👕 Wear loose, soft cotton clothes to avoid irritation.<br>" +
+          "🚫 Avoid direct sun exposure until skin heals.<br>" +
+          "🧴 Use mild moisturizer to prevent dryness.<br>" +
+          "🚨 Seek medical help if severe redness, blisters, or pain occurs.<br>";
         }
         else if(issue === "muscle pain"){
-        result ="✔ Rest the affected area and avoid heavy activity.<br>\
-        ✔ Apply warm compress to relax muscles.<br>\
-        ⚠ See a doctor if pain lasts more than a few days or follows injury.<br>";
+        result = warning + "💪 General Care (Muscle Pain):<br>" +
+          "🧊 Apply cold compress for initial pain or swelling.<br>" +
+          "🔥 Use warm compress after some time to relax muscles.<br>" +
+          "🌿 Gentle massage with warm oil (like sesame oil) for relief.<br>" +
+          "🧘 Take proper rest and avoid overexertion.<br>" +
+          "💧 Stay hydrated and maintain good nutrition.<br>" +
+          "🚫 Avoid heavy activity until pain reduces.<br>" +
+          "🚨 Seek medical help if pain is severe or persistent.<br>";
         }
         else if(issue === "indigestion" || issue === "acidity"){
-        result ="✔ Drink warm water or ginger tea for relief.<br>\
-        ✔ Eat light meals and avoid spicy or oily foods.<br>\
-        ⚠ Consult a doctor if symptoms are frequent or severe.<br>";
+        result = warning + "🔥 General Care (Indigestion/Acidity):<br>" +
+          "💧 Drink warm water or cold milk for relief.<br>" +
+          "🍵 Ginger or herbal tea helps improve digestion.<br>" +
+          "🥣 Eat light, simple meals in small portions.<br>" +
+          "🌿 Avoid spicy, oily, and junk foods.<br>" +
+          "🧘 Sit upright after eating and avoid lying down immediately.<br>" +
+          "💤 Maintain regular meal timings and proper sleep.<br>" +
+          "🚨 Seek medical help if symptoms are severe or frequent.<br>";
         }
         else if(issue === "cut" || issue === "wound"){
-        result ="✔ Clean the wound with clean water.<br>\
-        ✔ Apply antiseptic and cover with a clean bandage.<br>\
-        ⚠ Seek medical help for deep cuts or continuous bleeding.<br>";
+        result =warning + "🩹 General Care (Cut/Wound):<br>" +
+          "🧼 Clean the wound gently with clean water.<br>" +
+          "🧊 Stop bleeding by applying gentle pressure with a clean cloth.<br>" +
+          "🌿 Apply antiseptic or natural soothing agents like turmeric (if safe).<br>" +
+          "🩹 Cover with a clean, sterile bandage.<br>" +
+          "🚫 Avoid touching or scratching the wound.<br>" +
+          "🔄 Change dressing regularly to keep it clean.<br>" +
+          "🚨 Seek medical help for deep or infected wounds.<br>";
         }
         else if(issue === "back pain"){
-        result ="✔ Rest and avoid heavy lifting.<br>\
-        ✔ Apply a warm compress to relax muscles.<br>\
-        ⚠ See a doctor if pain is severe or lasts more than a week.<br>";
+        result = warning + "🪑 General Care (Back Pain):<br>" +
+          "🔥 Apply warm compress or heating pad to relax muscles.<br>" +
+          "🌿 Gentle massage with warm oil (like sesame oil) for relief.<br>" +
+          "🧘 Practice light stretching and maintain good posture.<br>" +
+          "💤 Take proper rest on a firm surface.<br>" +
+          "🚫 Avoid heavy lifting and sudden movements.<br>" +
+          "💧 Stay hydrated and maintain a healthy diet.<br>" +
+          "🚨 Seek medical help if pain is severe or long-lasting.<br>";
         }
         else if(issue === "joint pain"){
-        result ="✔ Rest the joint and apply a warm compress.<br>\
-        ✔ Do gentle stretching exercises.<br>\
-        ⚠ Seek medical help if swelling or severe pain occurs.<br>";
+        result = warning + "🦵 General Care (Joint Pain):<br>" +
+          "🔥 Apply warm compress to reduce stiffness and pain.<br>" +
+          "🌿 Gentle massage with warm oil (like sesame oil) for relief.<br>" +
+          "🧘 Do light exercises or stretching to keep joints flexible.<br>" +
+          "💤 Take proper rest and avoid overuse of joints.<br>" +
+          "💧 Stay hydrated and maintain a balanced diet.<br>" +
+          "🚫 Avoid cold exposure and heavy strain.<br>" +
+          "🚨 Seek medical help if pain is severe or persistent.<br>";
         }
         else if(issue === "eye irritation"){
-        result ="✔ Rinse eyes gently with clean water.<br>\
-        ✔ Avoid rubbing the eyes.<br>\
-        ⚠ Consult a doctor if redness, pain, or blurred vision continues.<br>";
+        result = warning + "👁️ General Care (Eye Irritation):<br>" +
+          "💧 Rinse eyes gently with clean, cool water.<br>" +
+          "🧊 Apply a cool compress to reduce redness and irritation.<br>" +
+          "🌿 Use rose water (pure, if suitable) for soothing effect.<br>" +
+          "📵 Avoid screen exposure and give proper rest to eyes.<br>" +
+          "🚫 Do not rub eyes to prevent further irritation.<br>" +
+          "🧼 Keep hands clean before touching eyes.<br>" +
+          "🚨 Seek medical help if irritation persists or vision is affected.<br>";
         }
         else if(issue === "dizziness"){
-        result ="✔ Sit or lie down immediately.<br>\
-        ✔ Drink water to prevent dehydration.<br>\
-        ⚠ Seek medical help if fainting or chest pain occurs.<br>";
+        result = warning + "💫 General Care (Dizziness):<br>" +
+          "🪑 Sit or lie down immediately to prevent falling.<br>" +
+          "💧 Drink water to stay hydrated.<br>" +
+          "🍬 Take something light like juice or sugar if due to low energy.<br>" +
+          "🌬️ Take deep, slow breaths and stay calm.<br>" +
+          "🚫 Avoid sudden movements or standing up quickly.<br>" +
+          "🧘 Get proper rest and avoid stress.<br>" +
+          "🚨 Seek medical help if dizziness is frequent or severe.<br>";
         }
         else if(issue === "sore muscles"){
-        result ="✔ Rest the affected area.<br>\
-        ✔ Apply warm compress or gentle massage.<br>\
-        ⚠ See a doctor if swelling or severe pain persists.<br>";
+        result = warning + "💪 General Care (Sore Muscles):<br>" +
+          "🧊 Apply cold compress to reduce pain and inflammation initially.<br>" +
+          "🔥 Use warm compress later to relax muscles.<br>" +
+          "🌿 Gentle massage with warm oil (like sesame oil) for relief.<br>" +
+          "🧘 Do light stretching to improve flexibility.<br>" +
+          "💤 Take proper rest and avoid overexertion.<br>" +
+          "💧 Stay hydrated to support muscle recovery.<br>" +
+          "🚨 Seek medical help if pain is severe or persistent.<br>";
         }
         else if(issue === "sprain"){
-        result ="✔ Rest the injured area.<br>\
-        ✔ Apply ice for 10-15 minutes to reduce swelling.<br>\
-        ⚠ Seek medical care if unable to move the joint.<br>";
+        result = warning + "🦶 General Care (Sprain):<br>" +
+          "🧊 Apply cold compress immediately to reduce swelling.<br>" +
+          "🪑 Rest the affected area and avoid movement.<br>" +
+          "🩹 Use compression bandage to support the joint.<br>" +
+          "⬆️ Keep the injured area elevated to reduce swelling.<br>" +
+          "🔥 After 1–2 days, use warm compress for relief.<br>" +
+          "🚫 Avoid heavy activity until fully healed.<br>" +
+          "🚨 Seek medical help if swelling or pain is severe.<br>";
         }
         else if(issue === "nausea"){
-        result ="✔ Take small sips of water or ginger tea.<br>\
-        ✔ Eat light, bland foods.<br>\
-        ⚠ See a doctor if vomiting continues or severe weakness occurs.<br>";
+        result = warning + "🤢 General Care (Nausea):<br>" +
+          "💧 Drink water or ORS in small sips to stay hydrated.<br>" +
+          "🍵 Ginger tea or ginger may help reduce nausea.<br>" +
+          "🥣 Eat light foods like crackers, rice, or banana.<br>" +
+          "🌬️ Get fresh air and avoid strong smells.<br>" +
+          "🧘 Take rest and avoid sudden movements.<br>" +
+          "🚫 Avoid oily, spicy, and heavy foods.<br>" +
+          "🚨 Seek medical help if nausea is severe or persistent.<br>";
         }
         else if(issue === "dry skin"){
-        result ="✔ Apply moisturizer regularly.<br>\
-        ✔ Drink plenty of water.<br>\
-        ⚠ Consult a doctor if cracking or infection occurs.<br>";
+        result = warning + "🧴 General Care (Dry Skin):<br>" +
+          "💧 Drink plenty of water to keep skin hydrated.<br>" +
+          "🌿 Apply natural moisturizers like coconut oil or aloe vera.<br>" +
+          "🛁 Use lukewarm water instead of hot water for bathing.<br>" +
+          "🧼 Use mild, fragrance-free soaps.<br>" +
+          "👕 Wear soft, breathable fabrics like cotton.<br>" +
+          "🥗 Eat healthy foods rich in vitamins and good fats.<br>" +
+          "🚨 Seek medical help if dryness is severe or causing cracks.<br>";
         }
         else if(issue === "dry lips"){
-        result ="✔ Apply lip balm or coconut oil regularly to keep lips moisturized.<br>\
-        ✔ Drink plenty of water to prevent dehydration.<br>\
-        ⚠ Avoid licking lips frequently; see a doctor if cracks bleed or infection develops.<br>";
+        result = warning + "💧 Drink plenty of water to stay hydrated.<br>" +
+          "🌿 Apply natural moisturizers like coconut oil or ghee.<br>" +
+          "🚫 Avoid licking lips as it increases dryness.<br>" +
+          "🧴 Use a gentle lip balm regularly.<br>" +
+          "🥗 Eat healthy foods rich in vitamins.<br>" +
+          "🌬️ Protect lips from cold and dry air.<br>" +
+          "🚨 Seek medical help if lips are severely cracked or bleeding.<br>";
         }
         else if(issue === "dark circles"){
-        result ="✔ Sleep 7–8 hours daily and reduce screen time.<br>\
-        ✔ Apply cold cucumber slices or cold tea bags over eyes.<br>\
-        ⚠ Consult a doctor if dark circles persist due to allergies or health issues.<br>";
+        result = warning + "👁️ General Care (Dark Circles):<br>" +
+          "💤 Get adequate sleep (7–8 hours daily).<br>" +
+          "💧 Drink plenty of water to stay hydrated.<br>" +
+          "🥒 Apply cucumber slices or cold compress to eyes.<br>" +
+          "🌿 Use natural remedies like aloe vera or almond oil.<br>" +
+          "📵 Reduce screen time and eye strain.<br>" +
+          "🥗 Maintain a healthy, balanced diet.<br>" +
+          "🚨 Seek medical help if dark circles persist or worsen.<br>";
         }
         else if(issue === "pimple" || issue === "acne"){
-        result ="✔ Wash face twice daily and keep skin clean.<br>\
-        ✔ Apply aloe vera or turmeric paste for natural relief.<br>\
-        ⚠ Avoid squeezing pimples; see a doctor if severe acne develops.<br>";
+        result = warning + "🌿 General Care (Pimple/Acne):<br>" +
+          "🧼 Wash face gently twice daily with mild cleanser.<br>" +
+          "🚫 Avoid touching or squeezing pimples.<br>" +
+          "🌿 Apply natural remedies like aloe vera or neem paste.<br>" +
+          "💧 Drink plenty of water to detoxify the body.<br>" +
+          "🥗 Eat healthy foods and avoid oily, junk foods.<br>" +
+          "🧴 Use non-oily (non-comedogenic) skincare products.<br>" +
+          "🚨 Seek medical help if acne is severe or persistent.<br>";
         }
         else if(issue === "cracked heels"){
-        result ="✔ Soak feet in warm water and gently scrub dead skin.<br>\
-        ✔ Apply moisturizer, coconut oil, or petroleum jelly before sleep.<br>\
-        ⚠ Seek medical care if cracks bleed or cause severe pain.<br>";
+        result = warning + "🦶 General Care (Cracked Heels):<br>" +
+          "💧 Keep feet clean and soak in warm water for 10–15 minutes.<br>" +
+          "🧼 Gently scrub dead skin using a pumice stone.<br>" +
+          "🌿 Apply moisturizers like coconut oil or ghee regularly.<br>" +
+          "🧴 Use thick foot cream or petroleum jelly at night.<br>" +
+          "🧦 Wear socks to lock in moisture.<br>" +
+          "🚫 Avoid walking barefoot on hard surfaces.<br>" +
+          "🚨 Seek medical help if cracks are deep or bleeding.<br>";
         }
         else{
             result = "Remedy not found.";
