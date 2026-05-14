@@ -1,32 +1,17 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>🌿Health Remedy Assistant</title>
     <style>
         /* INTRO SCREEN STYLE */
-    #introScreen{
-         position: fixed;
-         top:0;
-         left:0;
-        width:100%;
-        height:100%;
-         background: linear-gradient(to right, #c9e7ff, #e6f4ff);
-        display:flex;
-        justify-content:center;
-        align-items:center;
-        z-index: 999;
-    }
+
         #authBox {
     margin-top: 100px;
 }
 
-   .intro-card{
-    background:white;
-    padding:30px;
-    border-radius:15px;
-    box-shadow:0 6px 20px rgba(0,0,0,0.2);
-    text-align:center;
-}
+   
         html, body {
              height: 100%;
              margin: 0;
@@ -118,7 +103,143 @@
   display:none;
   box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
+/* ===== FUTURISTIC INTRO SCREEN ===== */
 
+#introScreen{
+    position: fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background: black;
+    overflow:hidden;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:9999;
+}
+
+/* Glow Background */
+
+.glow{
+    position:absolute;
+    width:400px;
+    height:400px;
+    background:#22c55e;
+    border-radius:50%;
+    filter:blur(150px);
+    opacity:0.15;
+}
+
+.glow1{
+    top:-100px;
+    left:-100px;
+}
+
+.glow2{
+    bottom:-100px;
+    right:-100px;
+}
+
+/* Heartbeat */
+
+.heartbeat-container{
+    position:absolute;
+    width:80%;
+    height:120px;
+    top:35%;
+    overflow:hidden;
+}
+
+.heartbeat-line{
+    width:200%;
+    height:100%;
+    position:absolute;
+    animation: heartbeatMove 4s linear infinite;
+}
+
+.heartbeat-line svg{
+    width:100%;
+    height:100%;
+}
+
+@keyframes heartbeatMove{
+    from{
+        transform:translateX(0);
+    }
+    to{
+        transform:translateX(-50%);
+    }
+}
+
+/* Intro Content */
+
+.intro-content{
+    text-align:center;
+    z-index:2;
+}
+
+.logo{
+    font-size:80px;
+    margin-bottom:20px;
+    opacity:0;
+    animation: fadeIn 2s forwards;
+    animation-delay:1s;
+    text-shadow:0 0 20px #22c55e;
+}
+
+.main-title{
+    color:white;
+    font-size:50px;
+    opacity:0;
+    animation: fadeIn 2s forwards;
+    animation-delay:2s;
+}
+
+.subtitle{
+    color:#cbd5e1;
+    font-size:20px;
+    margin-top:15px;
+    opacity:0;
+    animation: fadeIn 2s forwards;
+    animation-delay:3s;
+}
+
+/* Button */
+
+.start-btn{
+    margin-top:35px;
+    padding:15px 35px;
+    border:none;
+    border-radius:40px;
+    background:#22c55e;
+    color:white;
+    font-size:18px;
+    cursor:pointer;
+    box-shadow:0 0 20px #22c55e;
+    transition:0.3s;
+    opacity:0;
+    animation: fadeIn 2s forwards;
+    animation-delay:4s;
+}
+
+.start-btn:hover{
+    transform:scale(1.1);
+    box-shadow:0 0 40px #22c55e;
+}
+
+/* Fade Animation */
+
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
 
 
 
@@ -128,17 +249,55 @@
 </head>
 <body>
            <!-- INTRO SCREEN -->
+<!-- FUTURISTIC INTRO SCREEN -->
 <div id="introScreen">
-    <div class="intro-card">
-        <h1>🌿 Health Remedy Assistant</h1>
-        <p>Your smart guide to simple home remedies</p>
 
-        <img src="https://images.unsplash.com/photo-1584515933487-779824d29309?w=500" width="220">
+    <div class="glow glow1"></div>
+    <div class="glow glow2"></div>
 
-        <br><br>
-        <button onclick="startApp()">Start</button>
-        
+    <div class="heartbeat-container">
+        <div class="heartbeat-line">
+            <svg viewBox="0 0 1200 200">
+                <polyline
+                    fill="none"
+                    stroke="#22c55e"
+                    stroke-width="6"
+                    points="
+                    0,100
+                    100,100
+                    150,100
+                    180,40
+                    210,160
+                    240,100
+                    300,100
+                    350,100
+                    380,40
+                    410,160
+                    440,100
+                    1200,100"
+                />
+            </svg>
+        </div>
     </div>
+
+    <div class="intro-content">
+
+        <div class="logo">💚</div>
+
+        <h1 class="main-title">
+            Welcome to Health Remedy Assistant
+        </h1>
+
+        <p class="subtitle">
+            Your smart AI companion for wellness & home remedies
+        </p>
+
+        <button class="start-btn" onclick="startApp()">
+            Start Your Wellness Journey
+        </button>
+
+    </div>
+
 </div>
     <!-- LOGIN BOX -->
 <div id="authBox" style="display:none;">
